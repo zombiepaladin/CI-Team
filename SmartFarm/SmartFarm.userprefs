@@ -1,9 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Editor\HeightMapFromGridFloat.js">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Assets\Editor\HeightmapFromTexture.js" Line="11" Column="2" />
-      <File FileName="Assets\Editor\HeightMapFromGridFloat.js" Line="92" Column="27" />
+      <File FileName="Assets\Editor\HeightmapFromTexture.js" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\FPSInputController.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
