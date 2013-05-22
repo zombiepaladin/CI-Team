@@ -17,7 +17,6 @@ public class AITractor : MonoBehaviour {
 	float speed = 50.0f;
 	WaypointFPT waypoints;
 	//List<Tweener> tweens = new List<Tweener>();
-	Sequence s;
 	
 	// Use this for initialization
 	void Start () {
@@ -27,49 +26,52 @@ public class AITractor : MonoBehaviour {
 		waypoints.genPointsStr(new Vector3(50,0,50),true);
 		tractorAI = (GameObject)Instantiate(objPre,new Vector3(50,0,50),Quaternion.identity);
 		tractorAI.name = "AI Tractor FP";
-		s = new Sequence();
-		for(int i = 1; i < waypoints.points.Count;i++){
-			s.Append(HOTween.To(tractorAI.GetComponent<Transform>(),10,"position",waypoints.points[i]));
-		}
-		//HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
-		//currentPoint++;
-		s.Play();
+		HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[1]);
+		currentPoint++;
 		Debug.Log("Terrain size " + terrain.GetComponent<Terrain>().terrainData.size.z.ToString());
 	}
 	
 	void Update(){
+		
+		
 		//have terrain texture update here
-//		if(!HOTween.IsTweening(tractorAI.GetComponent<Transform>())){
-//			if(waypoints.endOfPath(tractorAI.GetComponent<Transform>().position)){
-//				if(isline){
-//					isline = false;
-//					waypoints.genPointsTurn(tractorAI.GetComponent<Transform>().position);
-//					currentPoint = 1;
-//					HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
-//					currentPoint++;
-//				}
-//				else if(!isline){
-//					if(isPos){
-//						isPos = false;
-//						waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
-//						currentPoint = 1;
-//						HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
-//						currentPoint++;
-//					}
-//					else if(!isPos){
-//						isPos = true;
-//						waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
-//						currentPoint = 1;
-//						HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
-//						currentPoint++;
-//					}
-//				}
-//			}
-//			else{
-//				HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[currentPoint]);
-//				currentPoint++;
-//			}
-//		}
+		if(!HOTween.IsTweening(tractorAI.GetComponent<Transform>())){
+			if(waypoints.endOfPath(tractorAI.GetComponent<Transform>().position)){
+				if(isline){
+					isline = false;
+					waypoints.genPointsTurn(tractorAI.GetComponent<Transform>().position);
+					currentPoint = 1;
+					HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[1]);
+					currentPoint++;
+				}
+				else if(!isline){
+					if(isPos){
+						isline = true;
+						isPos = false;
+						waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
+						currentPoint = 1;
+						HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
+						currentPoint++;
+						Debug.Log ("Current Point Pos " + waypoints.points[1].ToString());
+					}
+					else if(!isPos){
+						Debug.Log ("Current Point Pos " + waypoints.points[1].ToString());
+						isline = true;
+						isPos = true;
+						waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
+						currentPoint = 1;
+						HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
+						currentPoint++;
+						
+					}
+				}
+			}
+			else{
+				Debug.Log ("Current Point Pos " + waypoints.points[currentPoint].ToString());
+				HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[currentPoint]);
+				currentPoint++;
+			}
+		}
 		/*
 		 * This if Statement generates the waypoints after the intital waypoints.
 		 */ 

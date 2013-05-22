@@ -16,24 +16,24 @@ public class WaypointFPT{
 			points.Clear ();
 		}
 		points.Add(cp);
-		int k = (int)cp.z;
-		int i = 1;
+		float k = cp.z;
+		float i = 1.0f;
 		if(isPos){
-			while(k <= terrain.GetComponent<Terrain>().terrainData.size.z-50){
+			while(k <= terrain.GetComponent<Terrain>().terrainData.size.z-50.0f){
 				//GameObject t = new GameObject();
 				//t.GetComponent<Transform>().position = new Vector3(cp.position.x,0,300*i);
-				points.Add(new Vector3(cp.x,0,50*i));
+				points.Add(new Vector3(cp.x,0,50.0f*i));
 				i++;
 				k += 50;
 			}
 		}
 		else if(!isPos){
-			while(k >= 50){
+			while(k > 50){
 				//GameObject t = new GameObject();
 				//t.GetComponent<Transform>().position = new Vector3(cp.position.x,0,300*i);
-				points.Add(new Vector3(cp.x,0,50*i));
+				points.Add(new Vector3(cp.x,0,cp.z-(50.0f*i)));
 				i++;
-				k += 50;
+				k -= 50;
 			}
 		}
 	}
