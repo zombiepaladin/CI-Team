@@ -16,7 +16,6 @@ public class AITractor : MonoBehaviour {
 	int currentPoint = 1;
 	float speed = 50.0f;
 	WaypointFPT waypoints;
-	//List<Tweener> tweens = new List<Tweener>();
 	
 	// Use this for initialization
 	void Start () {

@@ -16,7 +16,10 @@ public class MenuGUI : MonoBehaviour {
 		if(GUI.Button (new Rect(0,300,150,100),"Load Terrain Test")){
 			//load terrain test scene here...
 		}
-		if(GUI.Button(new Rect(0,400,150,100),"Exit")){
+		if(GUI.Button(new Rect(0,400,150,100),"Load Farmer stuff")){
+			Application.LoadLevel ("Test_Farm");
+		}
+		if(GUI.Button(new Rect(0,500,150,100),"Exit")){
 			Application.Quit();
 		}
 	}
