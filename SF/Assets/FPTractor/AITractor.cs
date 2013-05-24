@@ -5,7 +5,22 @@ using Holoville.HOTween;
 using Holoville.HOTween.Plugins;
 
 public class AITractor : MonoBehaviour {
-	
+	/*
+	 * This is the AI controller for any vehicle. 
+	 * It takes in the vehicle frame (in this case a FPS controller) and creates an instance of it called tractorAI
+	 * It takes in the Position so it knows where to start.
+	 * It takes in also the Terran and a dugup Texture. the Terrain is to be passed into the waypoints class the texture is to be applied to the dugup terrain.
+	 * 
+	 * isLine is to see if it is turning or going stright.
+	 * isPos is to see if the line is increasing or decreasing.
+	 * currentPoint is the current spot in the waypoint list.
+	 * waypoints is the waypont manager and documentation for that can be found in waypointFPT.cs 
+	 * 
+	 * This class also uses the HOTween plug in which is distributed for free on the Unity asset store. 
+	 * Documentation for the class can be found at http://www.holoville.com/hotween/documentation.html
+	 * 
+	 * 
+	*/
 	public GameObject objPre;
 	public Transform thisPos;
 	public GameObject terrain;
@@ -14,10 +29,14 @@ public class AITractor : MonoBehaviour {
 	bool isline = true;
 	bool isPos = true;
 	int currentPoint = 1;
-	float speed = 50.0f;
 	WaypointFPT waypoints;
 	
-	// Use this for initialization
+	/*
+	 * This is ran during the start up of the scene.
+	 * 
+	 * This intilizes HOTween and generates the first line of waypoints.
+	 * 
+	*/ 
 	void Start () {
 		HOTween.Init(true,true,true);
 		HOTween.EnableOverwriteManager();
@@ -27,9 +46,20 @@ public class AITractor : MonoBehaviour {
 		tractorAI.name = "AI Tractor FP";
 		HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[1]);
 		currentPoint++;
-		Debug.Log("Terrain size " + terrain.GetComponent<Terrain>().terrainData.size.z.ToString());
 	}
 	
+	/*
+	 * This is ran during every frame.
+	 * 
+	 * The if statement sees if the tween is compleated.
+	 * 	It then checks to see if it is the end of the path.
+	 * 	if it is not then it generates the next tween.
+	 * 	If it is at the end it sees if it isline is ture (as isline is true when you are in a line)
+	 * 	If isline is false (as the turn was just compleated) it then checks if isPos is ture or not.
+	 *  If isPos is ture it calculates a negitive line(as isPos is true when you finish a positive line)
+	 * 	During all of these commands it generates new waypoints for the path and then creates a Tween.
+	 * 
+	*/
 	void Update(){
 		
 		
@@ -51,10 +81,8 @@ public class AITractor : MonoBehaviour {
 						currentPoint = 1;
 						HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
 						currentPoint++;
-						Debug.Log ("Current Point Pos " + waypoints.points[1].ToString());
 					}
-					else if(!isPos){
-						Debug.Log ("Current Point Pos " + waypoints.points[1].ToString());
+					else if(!isPos){;
 						isline = true;
 						isPos = true;
 						waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
@@ -66,14 +94,10 @@ public class AITractor : MonoBehaviour {
 				}
 			}
 			else{
-				Debug.Log ("Current Point Pos " + waypoints.points[currentPoint].ToString());
 				HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[currentPoint]);
 				currentPoint++;
 			}
 		}
-		/*
-		 * This if Statement generates the waypoints after the intital waypoints.
-		 */ 
 
 	}
 }
