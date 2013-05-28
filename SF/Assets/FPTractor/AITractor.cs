@@ -28,9 +28,11 @@ public class AITractor : MonoBehaviour {
 	private GameObject tractorAI;
 	bool isline = true;
 	bool isPos = true;
-	int currentPoint = 1;
+	float currentPoint = 0;
 	WaypointFPT waypoints;
-	
+	float lerpAmout = 0;
+	float lerpRate = 1.0f; 
+	float TotalTime = 0;
 	/*
 	 * This is ran during the start up of the scene.
 	 * 
@@ -44,8 +46,7 @@ public class AITractor : MonoBehaviour {
 		waypoints.genPointsStr(new Vector3(50,0,50),true);
 		tractorAI = (GameObject)Instantiate(objPre,new Vector3(50,0,50),Quaternion.identity);
 		tractorAI.name = "AI Tractor FP";
-		HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[1]);
-		currentPoint++;
+
 	}
 	
 	/*
@@ -61,43 +62,72 @@ public class AITractor : MonoBehaviour {
 	 * 
 	*/
 	void Update(){
-		
-		
-		//have terrain texture update here
-		if(!HOTween.IsTweening(tractorAI.GetComponent<Transform>())){
-			if(waypoints.endOfPath(tractorAI.GetComponent<Transform>().position)){
-				if(isline){
-					isline = false;
-					waypoints.genPointsTurn(tractorAI.GetComponent<Transform>().position);
-					currentPoint = 1;
-					HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[1]);
-					currentPoint++;
-				}
-				else if(!isline){
-					if(isPos){
-						isline = true;
-						isPos = false;
-						waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
-						currentPoint = 1;
-						HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
-						currentPoint++;
-					}
-					else if(!isPos){;
-						isline = true;
-						isPos = true;
-						waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
-						currentPoint = 1;
-						HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
-						currentPoint++;
-						
-					}
-				}
+		TotalTime += Time.deltaTime;
+		currentPoint = Mathf.Floor(TotalTime/lerpRate);
+		float offsetTime = TotalTime - (currentPoint*lerpRate);
+		if(currentPoint > waypoints.points.Count){
+			if(isline){
+				isline = false;
+				waypoints.genPointsTurn(tractorAI.GetComponent<Transform>().position);
+				TotalTime = 0;
 			}
-			else{
-				HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[currentPoint]);
-				currentPoint++;
+			else if(!isline){
+				if(isPos){
+					isline = true;
+					isPos = false;
+					waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
+					TotalTime = 0;
+				}
+				else if(!isPos){;
+					isline = true;
+					isPos = true;
+					waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
+					TotalTime = 0;
+				}
 			}
 		}
+		else{
+			
+			if(isline){
+				tractorAI.transform.position = waypoints.points[(int)currentPoint]+offsetTime*(waypoints.points[(int)currentPoint+1]-waypoints.points[(int)currentPoint]);
+			}
+		}
+		Debug.Log ("Current Pos " + currentPoint);
+		//have terrain texture update here
+//		if(!HOTween.IsTweening(tractorAI.GetComponent<Transform>())){
+//			if(waypoints.endOfPath(tractorAI.GetComponent<Transform>().position)){
+//				if(isline){
+//					isline = false;
+//					waypoints.genPointsTurn(tractorAI.GetComponent<Transform>().position);
+//					currentPoint = 1;
+//					HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[1]);
+//					currentPoint++;
+//				}
+//				else if(!isline){
+//					if(isPos){
+//						isline = true;
+//						isPos = false;
+//						waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
+//						currentPoint = 1;
+//						HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
+//						currentPoint++;
+//					}
+//					else if(!isPos){;
+//						isline = true;
+//						isPos = true;
+//						waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
+//						currentPoint = 1;
+//						HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
+//						currentPoint++;
+//						
+//					}
+//				}
+//			}
+//			else{
+//				HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[currentPoint]);
+//				currentPoint++;
+//			}
+//		}
 
 	}
 }
