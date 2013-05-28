@@ -52,13 +52,6 @@ public class AITractor : MonoBehaviour {
 	/*
 	 * This is ran during every frame.
 	 * 
-	 * The if statement sees if the tween is compleated.
-	 * 	It then checks to see if it is the end of the path.
-	 * 	if it is not then it generates the next tween.
-	 * 	If it is at the end it sees if it isline is ture (as isline is true when you are in a line)
-	 * 	If isline is false (as the turn was just compleated) it then checks if isPos is ture or not.
-	 *  If isPos is ture it calculates a negitive line(as isPos is true when you finish a positive line)
-	 * 	During all of these commands it generates new waypoints for the path and then creates a Tween.
 	 * 
 	*/
 	void Update(){
@@ -87,47 +80,9 @@ public class AITractor : MonoBehaviour {
 			}
 		}
 		else{
-			
-			if(isline){
-				tractorAI.transform.position = waypoints.points[(int)currentPoint]+offsetTime*(waypoints.points[(int)currentPoint+1]-waypoints.points[(int)currentPoint]);
-			}
+			tractorAI.transform.position = waypoints.points[(int)currentPoint]+offsetTime*(waypoints.points[(int)currentPoint+1]-waypoints.points[(int)currentPoint]);
 		}
 		Debug.Log ("Current Pos " + currentPoint);
 		//have terrain texture update here
-//		if(!HOTween.IsTweening(tractorAI.GetComponent<Transform>())){
-//			if(waypoints.endOfPath(tractorAI.GetComponent<Transform>().position)){
-//				if(isline){
-//					isline = false;
-//					waypoints.genPointsTurn(tractorAI.GetComponent<Transform>().position);
-//					currentPoint = 1;
-//					HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[1]);
-//					currentPoint++;
-//				}
-//				else if(!isline){
-//					if(isPos){
-//						isline = true;
-//						isPos = false;
-//						waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
-//						currentPoint = 1;
-//						HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
-//						currentPoint++;
-//					}
-//					else if(!isPos){;
-//						isline = true;
-//						isPos = true;
-//						waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
-//						currentPoint = 1;
-//						HOTween.To(tractorAI.GetComponent<Transform>(),10.0f,"position",waypoints.points[1]);
-//						currentPoint++;
-//						
-//					}
-//				}
-//			}
-//			else{
-//				HOTween.To(tractorAI.GetComponent<Transform>(),1.0f,"position",waypoints.points[currentPoint]);
-//				currentPoint++;
-//			}
-//		}
-
 	}
 }
