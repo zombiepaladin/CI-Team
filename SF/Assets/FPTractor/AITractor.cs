@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using Holoville.HOTween;
-using Holoville.HOTween.Plugins;
 
 public class AITractor : MonoBehaviour {
 	/*
@@ -16,8 +14,6 @@ public class AITractor : MonoBehaviour {
 	 * currentPoint is the current spot in the waypoint list.
 	 * waypoints is the waypont manager and documentation for that can be found in waypointFPT.cs 
 	 * 
-	 * This class also uses the HOTween plug in which is distributed for free on the Unity asset store. 
-	 * Documentation for the class can be found at http://www.holoville.com/hotween/documentation.html
 	 * 
 	 * 
 	*/
@@ -36,12 +32,9 @@ public class AITractor : MonoBehaviour {
 	/*
 	 * This is ran during the start up of the scene.
 	 * 
-	 * This intilizes HOTween and generates the first line of waypoints.
 	 * 
 	*/ 
 	void Start () {
-		HOTween.Init(true,true,true);
-		HOTween.EnableOverwriteManager();
 		waypoints = new WaypointFPT(terrain);
 		waypoints.genPointsStr(new Vector3(50,0,50),true);
 		tractorAI = (GameObject)Instantiate(objPre,new Vector3(50,0,50),Quaternion.identity);
