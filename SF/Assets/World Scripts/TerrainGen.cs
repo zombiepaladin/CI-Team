@@ -6,6 +6,7 @@ using System.IO;
 
 public class TerrainGen : MonoBehaviour {
 	public GameObject terrain;
+	public GameObject player;
 	SFHeightMap hm;
 	SFHeightMap shm;
 	
@@ -22,6 +23,7 @@ public class TerrainGen : MonoBehaviour {
 			terrain.GetComponent<Terrain>().terrainData.SetHeights(0,0,shm.getHM());
 		}
 		if(Input.GetKeyUp(KeyCode.E)){
+			player.transform.position += new Vector3(0,15,0);
 			terrain.GetComponent<Terrain>().terrainData.SetHeights(0,0,hm.getHM ());
 		}
 		if(Input.GetKeyUp (KeyCode.F1)){

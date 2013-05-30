@@ -14,7 +14,7 @@ public class MenuGUI : MonoBehaviour {
 			Application.LoadLevel("TractorController");
 		}
 		if(GUI.Button (new Rect(0,300,150,100),"Load Terrain Test")){
-			//load terrain test scene here...
+			Application.LoadLevel ("Terrain_Tests");
 		}
 		if(GUI.Button(new Rect(0,400,150,100),"Load Farmer stuff")){
 			Application.LoadLevel ("Test_Farm");
