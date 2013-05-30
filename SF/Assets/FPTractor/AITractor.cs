@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System.IO;
 
 public class AITractor : MonoBehaviour {
 	/*
@@ -20,15 +21,14 @@ public class AITractor : MonoBehaviour {
 	public GameObject objPre;
 	public Transform thisPos;
 	public GameObject terrain;
-	public Texture dugup;
 	private GameObject tractorAI;
 	bool isline = true;
 	bool isPos = true;
 	float currentPoint = 0;
 	WaypointFPT waypoints;
-	float lerpAmout = 0;
 	float lerpRate = 1.0f; 
 	float TotalTime = 0;
+	float[,,] alphatext;
 	/*
 	 * This is ran during the start up of the scene.
 	 * 
@@ -39,7 +39,21 @@ public class AITractor : MonoBehaviour {
 		waypoints.genPointsStr(new Vector3(50,0,50),true);
 		tractorAI = (GameObject)Instantiate(objPre,new Vector3(50,0,50),Quaternion.identity);
 		tractorAI.name = "AI Tractor FP";
-
+		alphatext = new float[terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,2];
+		for(int i = 0; i < terrain.GetComponent<Terrain>().terrainData.alphamapWidth; i++){
+			for(int j = 0; j < terrain.GetComponent<Terrain>().terrainData.alphamapHeight; j++){
+				alphatext[i,j,0] = 1;
+				alphatext[i,j,1] = 0;
+			}
+		}
+		Vector3 localPos = new Vector3(50,0,50) - terrain.transform.position;
+		Vector3 normalPos = new Vector3((localPos.x/terrain.GetComponent<Terrain>().terrainData.size.x) * terrain.GetComponent<Terrain>().terrainData.alphamapWidth,
+			0,
+			(localPos.z/terrain.GetComponent<Terrain>().terrainData.size.z) * terrain.GetComponent<Terrain>().terrainData.alphamapHeight);
+		Debug.Log(normalPos.ToString());
+		alphatext[(int)normalPos.z,(int)normalPos.x,0] = 0;
+		alphatext[(int)normalPos.z,(int)normalPos.x,1] = 1;
+		terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
 	}
 	
 	/*
@@ -75,7 +89,13 @@ public class AITractor : MonoBehaviour {
 		else{
 			tractorAI.transform.position = waypoints.points[(int)currentPoint]+offsetTime*(waypoints.points[(int)currentPoint+1]-waypoints.points[(int)currentPoint]);
 		}
-		Debug.Log ("Current Pos " + currentPoint);
-		//have terrain texture update here
+			Vector3 localPos = tractorAI.transform.position - terrain.transform.position;
+			Vector3 normalPos = new Vector3((localPos.x/terrain.GetComponent<Terrain>().terrainData.size.x) * terrain.GetComponent<Terrain>().terrainData.alphamapWidth,
+				0,
+				(localPos.z/terrain.GetComponent<Terrain>().terrainData.size.z) * terrain.GetComponent<Terrain>().terrainData.alphamapHeight);
+			Debug.Log(normalPos.ToString());
+			alphatext[(int)normalPos.z,(int)normalPos.x,0] = 0;
+			alphatext[(int)normalPos.z,(int)normalPos.x,1] = 1;
+			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
 	}
 }
