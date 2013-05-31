@@ -3,7 +3,9 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-
+/// <summary>
+/// Terrain generation from a file or creates a random one right now.
+/// </summary>
 public class TerrainGen : MonoBehaviour {
 	public GameObject terrain;
 	public GameObject player;

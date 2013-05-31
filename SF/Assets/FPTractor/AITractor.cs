@@ -30,8 +30,8 @@ public class AITractor : MonoBehaviour {
 	float TotalTime = 0;
 	float[,,] alphatext;
 	/*
-	 * This is ran during the start up of the scene.
-	 * 
+	 * This is ran during the start up of the scene. 
+	 * This set the terrain to dug up when driven over.
 	 * 
 	*/ 
 	void Start () {
@@ -50,7 +50,6 @@ public class AITractor : MonoBehaviour {
 		Vector3 normalPos = new Vector3((localPos.x/terrain.GetComponent<Terrain>().terrainData.size.x) * terrain.GetComponent<Terrain>().terrainData.alphamapWidth,
 			0,
 			(localPos.z/terrain.GetComponent<Terrain>().terrainData.size.z) * terrain.GetComponent<Terrain>().terrainData.alphamapHeight);
-		Debug.Log(normalPos.ToString());
 		alphatext[(int)normalPos.z,(int)normalPos.x,0] = 0;
 		alphatext[(int)normalPos.z,(int)normalPos.x,1] = 1;
 		terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
@@ -58,7 +57,7 @@ public class AITractor : MonoBehaviour {
 	
 	/*
 	 * This is ran during every frame.
-	 * 
+	 * This does our custom lerping and updates the terrain if it is driven over. 
 	 * 
 	*/
 	void Update(){
@@ -93,7 +92,6 @@ public class AITractor : MonoBehaviour {
 			Vector3 normalPos = new Vector3((localPos.x/terrain.GetComponent<Terrain>().terrainData.size.x) * terrain.GetComponent<Terrain>().terrainData.alphamapWidth,
 				0,
 				(localPos.z/terrain.GetComponent<Terrain>().terrainData.size.z) * terrain.GetComponent<Terrain>().terrainData.alphamapHeight);
-			Debug.Log(normalPos.ToString());
 			alphatext[(int)normalPos.z,(int)normalPos.x,0] = 0;
 			alphatext[(int)normalPos.z,(int)normalPos.x,1] = 1;
 			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
