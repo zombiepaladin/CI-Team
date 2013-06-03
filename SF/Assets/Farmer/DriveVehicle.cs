@@ -49,17 +49,17 @@ public class DriveVehicle : MonoBehaviour {
 	 */
 	void OnGUI(){
 		if(isKeyPressed){
-			GUI.Box(new Rect(600,300,800,100),"What do you want to do?");
-			if(GUI.Button(new Rect(600,325,150,75), "AI tractor")){
+			GUI.Box(new Rect(0,100,600,100),"What do you want to do?");
+			if(GUI.Button(new Rect(0,125,150,75), "AI tractor")){
 				Application.LoadLevel("AI Tractor");
 			}
-			if(GUI.Button(new Rect(750,325,150,75), "First Person Tractor")){
+			if(GUI.Button(new Rect(150,125,150,75), "First Person Tractor")){
 				Application.LoadLevel("FPTractorEnvierment");
 			}
-			if(GUI.Button(new Rect(900,325,150,75), "3rd perosn Tractor")){
+			if(GUI.Button(new Rect(300,125,150,75), "3rd perosn Tractor")){
 				Application.LoadLevel("TractorController");
 			}
-			if(GUI.Button(new Rect(1050,325,150,75), "Cancel")){
+			if(GUI.Button(new Rect(450,125,150,75), "Cancel")){
 				playerCamera.gameObject.GetComponent<MouseLook>().enabled = true;
 				playerObj.GetComponent<MouseLook>().enabled = true;
 				playerObj.SendMessage("enableYourself",true);

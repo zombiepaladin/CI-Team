@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -7,9 +6,11 @@ using System.IO;
 /// <summary>
 /// Smart Farm Height Map.
 /// </summary>
-public class SFHeightMap{
+public class SFFieldData{
 	
 	float[,] hm;
+	float[,,] am;
+	int[,] dm;
 	int hmHeight;
 	int hmWidth;
 	
@@ -25,9 +26,9 @@ public class SFHeightMap{
 	/// <param name='gen'>
 	/// A bool to see if you want flat or modeled terrain.
 	/// </param>
-	public SFHeightMap(int width, int height, bool gen){
-		hmHeight = height;
-		hmWidth = width;
+	public SFFieldData(int HMwidth, int HMheight, bool gen){
+		hmHeight = HMheight;
+		hmWidth = HMwidth;
 		hm = new float[hmWidth,hmHeight];
 		if(gen){
 			genHM ();
@@ -40,12 +41,7 @@ public class SFHeightMap{
 	/// <summary>
 	/// Saves the terrain in a SFHM file (A fancy text file).
 	/// </summary>
-	public void SaveTerrain() {
-		string filename = EditorUtility.SaveFilePanel("Save a Hight Map","","CurrentHM.sfhm","sfhm");
-		if(filename == null){
-			EditorUtility.DisplayDialog("Invalid Name!","You must name the file","Ok");
-			return;
-		}
+	public void SaveTerrain(string filename) {
         FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.ReadWrite);
         StreamWriter sw = new StreamWriter(fs);
 		for(int i = 0; i < hmWidth; i++) {
@@ -71,12 +67,7 @@ public class SFHeightMap{
 	/// The terrain.
 	/// </returns>
   	public float[,] LoadTerrain() {
-		string filename = EditorUtility.OpenFilePanel("Open a Hight Map","",".sfhm");
-		if(filename == null){
-			EditorUtility.DisplayDialog("Invalid Name!","You must select a sfhm file","Ok");
-			return null;
-		}
-        FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.ReadWrite);
+        FileStream fs = new FileStream("", FileMode.Open, FileAccess.ReadWrite);
         StreamReader sr = new StreamReader(fs);
         sr.BaseStream.Seek(0, SeekOrigin.Begin);
 		string rin = " ";

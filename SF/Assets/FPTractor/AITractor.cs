@@ -29,6 +29,7 @@ public class AITractor : MonoBehaviour {
 	float lerpRate = 1.0f; 
 	float TotalTime = 0;
 	float[,,] alphatext;
+	int[,] detailtext;
 	/*
 	 * This is ran during the start up of the scene. 
 	 * This set the terrain to dug up when driven over.
@@ -40,6 +41,12 @@ public class AITractor : MonoBehaviour {
 		tractorAI = (GameObject)Instantiate(objPre,new Vector3(50,0,50),Quaternion.identity);
 		tractorAI.name = "AI Tractor FP";
 		alphatext = new float[terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,2];
+		detailtext = new int[terrain.GetComponent<Terrain>().terrainData.detailWidth,terrain.GetComponent<Terrain>().terrainData.detailHeight];
+		for(int i = 0; i < terrain.GetComponent<Terrain>().terrainData.detailWidth; i++){
+			for(int j = 0; j < terrain.GetComponent<Terrain>().terrainData.detailHeight; j++){
+				detailtext[i,j] = 0;
+			}
+		}
 		for(int i = 0; i < terrain.GetComponent<Terrain>().terrainData.alphamapWidth; i++){
 			for(int j = 0; j < terrain.GetComponent<Terrain>().terrainData.alphamapHeight; j++){
 				alphatext[i,j,0] = 1;
@@ -53,6 +60,7 @@ public class AITractor : MonoBehaviour {
 		alphatext[(int)normalPos.z,(int)normalPos.x,0] = 0;
 		alphatext[(int)normalPos.z,(int)normalPos.x,1] = 1;
 		terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
+		
 	}
 	
 	/*
