@@ -3,13 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Serialization;
+using System.IO;
 
 public class SFField {
-	
+	[SerializeThis]
 	int hmWidth;
+	
+	[SerializeThis]
  	int hmHeight;
+	
+	[SerializeThis]
 	int amWidth;
+	
+	[SerializeThis]
 	int amHeight;
+	
+	[SerializeThis]
 	int amLayers;
 	
 	[SerializeThis]
@@ -22,8 +31,14 @@ public class SFField {
 	List<Vector4> plantPos = new List<Vector4>();
 	
 	
-	public void Save(){
-		UnitySerializer.WriteToFile(UnitySerializer.JSONSerialize(this),"field.txt");
+	public void Save(string fn){
+		byte[] seralized = UnitySerializer.Serialize(this);
+		BS.Save(seralized,fn);
+	}
+	
+	public byte[] Load(string fn){
+		byte[] seralized = BS.Load(fn);
+		return seralized;
 	}
 	
 	public void setHM(float[,] h, int width, int height){
@@ -37,6 +52,18 @@ public class SFField {
 		amWidth = width;
 		amHeight = height;
 		amLayers = layers;
+	}
+	
+	public float[,] getHM(){
+		return hm;
+	}
+	
+	public float[,,] getAM(){
+		return am;
+	}
+	
+	public List<Vector4> getCrops(){
+		return plantPos;
 	}
 	
 	public void addPlant(Vector4 crop){

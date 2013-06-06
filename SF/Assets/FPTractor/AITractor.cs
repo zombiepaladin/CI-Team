@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
+using Serialization;
 
 public class AITractor : MonoBehaviour {
 	/*
@@ -67,8 +68,16 @@ public class AITractor : MonoBehaviour {
 		if(Input.GetKeyUp(KeyCode.F1)){
 			sf.setAM(alphatext,terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,terrain.GetComponent<Terrain>().terrainData.alphamapLayers);
 			sf.setHM (terrain.GetComponent<Terrain>().terrainData.GetHeights(0,0,terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight),terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight);
-			sf.Save ();
+			sf.Save ("file.sffd");
 			Debug.Log ("Bob");
+		}
+		if(Input.GetKeyUp (KeyCode.F2)){
+			byte[] load = sf.Load ("test.sffd");
+			UnitySerializer.DeserializeInto(load,sf);
+			tractorAI.transform.position += new Vector3(0,15,0);
+			terrain.GetComponent<Terrain>().terrainData.SetHeights(0,0,sf.getHM ());
+			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,sf.getAM());
+			alphatext = sf.getAM();
 		}
 		TotalTime += Time.deltaTime;
 		currentPoint = Mathf.Floor(TotalTime/lerpRate);

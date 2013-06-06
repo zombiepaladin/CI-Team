@@ -1,9 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FPTractor\AITractor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\World Scripts\SFField.cs">
     <Files>
-      <File FileName="Assets\World Scripts\SFField.cs" Line="26" Column="80" />
-      <File FileName="Assets\FPTractor\AITractor.cs" Line="71" Column="19" />
+      <File FileName="Assets\FPTractor\AITractor.cs" Line="5" Column="21" />
+      <File FileName="Assets\World Scripts\SFField.cs" Line="66" Column="19" />
+      <File FileName="Assets\World Scripts\BS.cs" Line="55" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
