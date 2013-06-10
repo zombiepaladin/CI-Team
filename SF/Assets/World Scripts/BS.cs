@@ -6,8 +6,10 @@ using System.IO;
 using System.Text;
 using System.Linq;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using System.Net;
 
 public class BS{
+	static WebClient wc = new WebClient();
 	
 	/// <summary>
 	/// Save the specified data in the file.
@@ -27,6 +29,8 @@ public class BS{
 		fs.Close();
 	}
 	
+	
+		
 	/// <summary>
 	/// Load the specified File.
 	/// </summary>

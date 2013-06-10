@@ -1,13 +1,29 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FPTractor\AITractor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\World Scripts\BS.cs">
     <Files>
+      <File FileName="Assets\World Scripts\BS.cs" Line="32" Column="2" />
       <File FileName="Assets\GUI Scripts\FieldGUI.cs" Line="36" Column="6" />
-      <File FileName="Assets\World Scripts\BS.cs" Line="22" Column="71" />
       <File FileName="Assets\FPTractor\AITractor.cs" Line="72" Column="4" />
       <File FileName="Assets\World Scripts\SFField.cs" Line="139" Column="2" />
       <File FileName="Assets\UnitySerializer\Scripts\PauseMenu.js" Line="62" Column="31" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="FPTractor" expanded="True" />
+              <Node name="GUI Scripts" expanded="True" />
+              <Node name="World Scripts" expanded="True">
+                <Node name="BS.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-firstpass" expanded="True" />
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
