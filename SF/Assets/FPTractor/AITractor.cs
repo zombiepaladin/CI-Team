@@ -31,6 +31,7 @@ public class AITractor : MonoBehaviour {
 	float TotalTime = 0;
 	float[,,] alphatext;
 	SFField sf = new SFField();
+	string name = "";
 	
 	/*
 	 * This is ran during the start up of the scene. 
@@ -42,20 +43,34 @@ public class AITractor : MonoBehaviour {
 		waypoints.genPointsStr(new Vector3(50,0,50),true);
 		tractorAI = (GameObject)Instantiate(objPre,new Vector3(50,0,50),Quaternion.identity);
 		tractorAI.name = "AI Tractor FP";
-		alphatext = new float[terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,2];
-		for(int i = 0; i < terrain.GetComponent<Terrain>().terrainData.alphamapWidth; i++){
-			for(int j = 0; j < terrain.GetComponent<Terrain>().terrainData.alphamapHeight; j++){
-				alphatext[i,j,0] = 1;
-				alphatext[i,j,1] = 0;
+		Debug.Log (PlayerPrefs.GetString("FieldName"));
+		if(PlayerPrefs.GetString("FieldName") == ""){
+			name = PlayerPrefs.GetString("NFName");
+			alphatext = new float[terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,2];
+			for(int i = 0; i < terrain.GetComponent<Terrain>().terrainData.alphamapWidth; i++){
+				for(int j = 0; j < terrain.GetComponent<Terrain>().terrainData.alphamapHeight; j++){
+					alphatext[i,j,0] = 1;
+					alphatext[i,j,1] = 0;
+				}
 			}
+			Vector3 localPos = new Vector3(50,0,50) - terrain.transform.position;
+			Vector3 normalPos = new Vector3((localPos.x/terrain.GetComponent<Terrain>().terrainData.size.x) * terrain.GetComponent<Terrain>().terrainData.alphamapWidth,
+				0,
+				(localPos.z/terrain.GetComponent<Terrain>().terrainData.size.z) * terrain.GetComponent<Terrain>().terrainData.alphamapHeight);
+			alphatext[(int)normalPos.z,(int)normalPos.x,0] = 0;
+			alphatext[(int)normalPos.z,(int)normalPos.x,1] = 1;
+			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
 		}
-		Vector3 localPos = new Vector3(50,0,50) - terrain.transform.position;
-		Vector3 normalPos = new Vector3((localPos.x/terrain.GetComponent<Terrain>().terrainData.size.x) * terrain.GetComponent<Terrain>().terrainData.alphamapWidth,
-			0,
-			(localPos.z/terrain.GetComponent<Terrain>().terrainData.size.z) * terrain.GetComponent<Terrain>().terrainData.alphamapHeight);
-		alphatext[(int)normalPos.z,(int)normalPos.x,0] = 0;
-		alphatext[(int)normalPos.z,(int)normalPos.x,1] = 1;
-		terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
+		else{
+			name = PlayerPrefs.GetString("FieldName");
+			byte[] load = sf.Load (PlayerPrefs.GetString("FieldName"));
+			UnitySerializer.DeserializeInto(load,sf);
+			tractorAI.transform.position += new Vector3(0,15,0);
+			terrain.GetComponent<Terrain>().terrainData.SetHeights(0,0,sf.getHM ());
+			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,sf.getAM());
+			alphatext = sf.getAM();
+			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
+		}
 		
 	}
 	
@@ -68,7 +83,7 @@ public class AITractor : MonoBehaviour {
 		if(Input.GetKeyUp(KeyCode.F1)){
 			sf.setAM(alphatext,terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,terrain.GetComponent<Terrain>().terrainData.alphamapLayers);
 			sf.setHM (terrain.GetComponent<Terrain>().terrainData.GetHeights(0,0,terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight),terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight);
-			sf.Save ("file.sffd");
+			sf.Save (name);
 			Debug.Log ("Bob");
 		}
 		if(Input.GetKeyUp (KeyCode.F2)){
