@@ -6,11 +6,11 @@ using System.IO;
 using System.Text;
 using System.Linq;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
-using System.Net;
+
 
 public class BS{
-	static WebClient wc = new WebClient();
 	
+	static mySQLScripts sql = new mySQLScripts();
 	/// <summary>
 	/// Save the specified data in the file.
 	/// </summary>
@@ -27,10 +27,17 @@ public class BS{
 		bw.Write(saveS);
 		bw.Close();
 		fs.Close();
+		Debug.Log(saveS.Length);
+	}
+	
+	public static void SaveToWeb(byte[] data, string fn, string un){
+		if(!sql.connected){
+			sql.Connect();
+		}
+		sql.AddData(BS.Compress(data),fn,un);
 	}
 	
 	
-		
 	/// <summary>
 	/// Load the specified File.
 	/// </summary>

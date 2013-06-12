@@ -7,15 +7,18 @@ public class FieldGUI : MonoBehaviour {
 	
 	string[] files;
 	
+	//mySQLScripts sql = new mySQLScripts();
 	bool nf = false;
-	string name = "Enter Field Name";
+	bool une = false;
+	string fn = "Enter Field Name";
+	string un = "UserName";
 	
 	void Start(){
-		files = System.IO.Directory.GetFiles(Application.dataPath + "\\SFFields\\");
+		//sql.Connect();
 	}
 	
 	void OnGUI(){
-		if(!nf){
+		if(!nf && une){
 			GUIStyle gs = "box";
 			GUILayout.BeginArea(new Rect(Screen.width/2 - 200,Screen.height/2 - 300, 400, 600),gs);
 			GUILayout.BeginVertical(); 
@@ -39,12 +42,12 @@ public class FieldGUI : MonoBehaviour {
     		GUILayout.EndVertical();
     		GUILayout.EndArea();
 		}
-		else{
+		else if(nf && une){
 			GUIStyle gs = "box";
 			GUILayout.BeginArea(new Rect(Screen.width/2 - 200,Screen.height/2 - 300, 400, 600),gs);
 			GUILayout.BeginVertical(); 
     		GUILayout.FlexibleSpace();
-			name = GUILayout.TextField(name);
+			fn = GUILayout.TextField(fn);
 			if(GUILayout.Button("OK")){
 				PlayerPrefs.SetString("NFName",name);
 				Application.LoadLevel("AI Tractor");
@@ -55,6 +58,19 @@ public class FieldGUI : MonoBehaviour {
 			GUILayout.FlexibleSpace();
     		GUILayout.EndVertical();
     		GUILayout.EndArea();
+		}
+		else{
+			GUIStyle gs = "box";
+			GUILayout.BeginArea(new Rect(Screen.width/2 - 200,Screen.height/2 - 300, 400, 600),gs);
+			GUILayout.BeginVertical(); 
+    		GUILayout.FlexibleSpace();
+			GUILayout.Space(60);
+			GUILayout.TextField(un);
+			if(GUILayout.Button("Ok")){
+				PlayerPrefs.SetString("UserName",un);
+				//files = sql.GetFields(un).ToArray();
+				une = true;
+			}
 		}
 	}
 }

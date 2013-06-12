@@ -31,7 +31,7 @@ public class AITractor : MonoBehaviour {
 	float TotalTime = 0;
 	float[,,] alphatext;
 	SFField sf = new SFField();
-	string name = "";
+	string FiledName = "";
 	
 	/*
 	 * This is ran during the start up of the scene. 
@@ -45,7 +45,7 @@ public class AITractor : MonoBehaviour {
 		tractorAI.name = "AI Tractor FP";
 		Debug.Log (PlayerPrefs.GetString("FieldName"));
 		if(PlayerPrefs.GetString("FieldName") == ""){
-			name = PlayerPrefs.GetString("NFName");
+			FiledName = PlayerPrefs.GetString("NFName");
 			alphatext = new float[terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,2];
 			for(int i = 0; i < terrain.GetComponent<Terrain>().terrainData.alphamapWidth; i++){
 				for(int j = 0; j < terrain.GetComponent<Terrain>().terrainData.alphamapHeight; j++){
@@ -62,7 +62,7 @@ public class AITractor : MonoBehaviour {
 			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
 		}
 		else{
-			name = PlayerPrefs.GetString("FieldName");
+			FiledName = PlayerPrefs.GetString("FieldName");
 			byte[] load = sf.Load (PlayerPrefs.GetString("FieldName"));
 			UnitySerializer.DeserializeInto(load,sf);
 			tractorAI.transform.position += new Vector3(0,15,0);
@@ -83,7 +83,7 @@ public class AITractor : MonoBehaviour {
 		if(Input.GetKeyUp(KeyCode.F1)){
 			sf.setAM(alphatext,terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,terrain.GetComponent<Terrain>().terrainData.alphamapLayers);
 			sf.setHM (terrain.GetComponent<Terrain>().terrainData.GetHeights(0,0,terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight),terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight);
-			sf.Save (name);
+			sf.Save (FiledName);
 			Debug.Log ("Bob");
 		}
 		if(Input.GetKeyUp (KeyCode.F2)){
