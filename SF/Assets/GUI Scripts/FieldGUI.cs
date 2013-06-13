@@ -7,14 +7,13 @@ public class FieldGUI : MonoBehaviour {
 	
 	string[] files;
 	
-	//mySQLScripts sql = new mySQLScripts();
 	bool nf = false;
-	bool une = false;
+	bool une = true;
 	string fn = "Enter Field Name";
 	string un = "UserName";
 	
 	void Start(){
-		//sql.Connect();
+		files = System.IO.Directory.GetFiles(Application.dataPath + "\\SFFields\\");
 	}
 	
 	void OnGUI(){
@@ -65,12 +64,14 @@ public class FieldGUI : MonoBehaviour {
 			GUILayout.BeginVertical(); 
     		GUILayout.FlexibleSpace();
 			GUILayout.Space(60);
-			GUILayout.TextField(un);
+			un = GUILayout.TextField(un);
 			if(GUILayout.Button("Ok")){
 				PlayerPrefs.SetString("UserName",un);
-				//files = sql.GetFields(un).ToArray();
 				une = true;
 			}
+			GUILayout.FlexibleSpace();
+    		GUILayout.EndVertical();
+    		GUILayout.EndArea();
 		}
 	}
 }

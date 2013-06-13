@@ -51,13 +51,16 @@ public class DriveVehicle : MonoBehaviour {
 		if(isKeyPressed){
 			GUI.Box(new Rect(0,100,600,100),"What do you want to do?");
 			if(GUI.Button(new Rect(0,125,150,75), "AI tractor")){
-				Application.LoadLevel("AI Tractor");
+				Application.LoadLevel("Load_Terrain");
+				PlayerPrefs.SetInt ("Player Choice",0);
 			}
 			if(GUI.Button(new Rect(150,125,150,75), "First Person Tractor")){
 				Application.LoadLevel("FPTractorEnvierment");
+				PlayerPrefs.SetInt ("Player Choice",1);
 			}
 			if(GUI.Button(new Rect(300,125,150,75), "3rd perosn Tractor")){
-				Application.LoadLevel("TractorController");
+				Application.LoadLevel("Load_Terrain");
+				PlayerPrefs.SetInt ("Player Choice",2);
 			}
 			if(GUI.Button(new Rect(450,125,150,75), "Cancel")){
 				playerCamera.gameObject.GetComponent<MouseLook>().enabled = true;

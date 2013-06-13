@@ -45,6 +45,11 @@ public class SFField {
 		BS.Save(seralized,fn);
 	}
 	
+	public void SaveToWeb(string fn){
+		byte[] seralized = UnitySerializer.Serialize(this);
+		BS.SaveToWeb(seralized,fn,"bob");
+	}
+	
 	/// <summary>
 	/// Load the byte array of a file.
 	/// </summary>

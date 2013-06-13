@@ -10,7 +10,6 @@ using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 
 public class BS{
 	
-	static mySQLScripts sql = new mySQLScripts();
 	/// <summary>
 	/// Save the specified data in the file.
 	/// </summary>
@@ -30,11 +29,22 @@ public class BS{
 		Debug.Log(saveS.Length);
 	}
 	
-	public static void SaveToWeb(byte[] data, string fn, string un){
-		if(!sql.connected){
-			sql.Connect();
+	public static void SaveToWeb(byte[] d, string fn, string un){
+		WWWForm form = new WWWForm();
+		string query = "INSERT INTO Fields(FieldName, UserName, CompressedString) VALUES "+fn+","+un+","+BS.Compress(d)+")";
+		form.AddField("q", query);
+		string results = "";
+		form.AddField ("r", results);
+		WWW w = new WWW("www.cis.ksu.edu/~borzen/php_save.php",form);
+		if(w.error != null){
+			Debug.Log (w.error.ToString());
 		}
-		sql.AddData(BS.Compress(data),fn,un);
+		else{
+			
+			Debug.Log (System.Text.Encoding.Default.GetString(form.data));
+			Debug.Log ("bob");
+		}
+		w.Dispose();
 	}
 	
 	
