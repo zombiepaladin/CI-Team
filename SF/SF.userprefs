@@ -1,13 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FPTractor\AITractor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GUI Scripts\LogIn.cs">
     <Files>
-      <File FileName="Assets\GUI Scripts\FieldGUI.cs" Line="11" Column="17" />
-      <File FileName="Assets\Farmer\DriveVehicle.cs" Line="59" Column="44" />
+      <File FileName="Assets\GUI Scripts\LogIn.cs" Line="88" Column="60" />
       <File FileName="Assets\GUI Scripts\MenuGUI.cs" Line="17" Column="25" />
+      <File FileName="Assets\GUI Scripts\FieldGUI.cs" Line="30" Column="3" />
+      <File FileName="Assets\Farmer\DriveVehicle.cs" Line="59" Column="44" />
       <File FileName="Assets\FPTractor\AITractor.cs" Line="86" Column="24" />
       <File FileName="Assets\World Scripts\BS.cs" Line="44" Column="63" />
       <File FileName="Assets\World Scripts\SFField.cs" Line="50" Column="36" />
+      <File FileName="Assets\FPTractor\TractorFrame.cs" Line="27" Column="3" />
+      <File FileName="Assets\FPTractor\LightBar.cs" Line="32" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
