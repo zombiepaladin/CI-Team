@@ -18,47 +18,53 @@ public class LogIn : MonoBehaviour {
 	bool displayed2 = false;
 	void OnGUI(){
 		if(!newUser){
-			GUI.Label(new Rect(10,10,80,20),"Username:");
-			GUI.Label(new Rect(10,30,80,20),"Password:");
+			GUI.Label(new Rect((Screen.width/2) - 90,10,80,20),"Username:");
+			GUI.Label(new Rect((Screen.width/2) - 90,30,80,20),"Password:");
 	
-			username = GUI.TextField(new Rect(90,10,100,20),username);
-			password = GUI.PasswordField(new Rect(90,30,100,20),password,'*');
+			username = GUI.TextField(new Rect((Screen.width/2) - 10,10,100,20),username);
+			password = GUI.PasswordField(new Rect((Screen.width/2) - 10,30,100,20),password,'*');
 		
-			if(GUI.Button(new Rect(10,60,100,20),"Login")){
-			
+			if(GUI.Button(new Rect((Screen.width/2) - 90,60,100,20),"Login")){
+				bool sucess = LoginWeb();
+				if(sucess){
+					Application.LoadLevel("Test_Main_Menu");
+				}
+				else{
+					formText += "Login Unsucessfull!\n";
+				}
 			}
-			if(GUI.Button(new Rect(110,60,100,20),"Register")){
+			if(GUI.Button(new Rect((Screen.width/2)+10,60,100,20),"Register")){
 				newUser = true;
 			}
-			GUI.TextArea(new Rect(10,150,500,500),formText);
+			GUI.TextArea(new Rect((Screen.width/2) - 125,150,300,300),formText);
 		}
 		else{
 
 			
-			GUI.Label(new Rect(10,10,80,20),"Username:");
-			GUI.Label(new Rect(10,30,80,20),"Password:");
-			GUI.Label(new Rect(10,50,80,20),"Confirm password");
-			GUI.Label(new Rect(10,70,80,20),"E-mail:");
+			GUI.Label(new Rect((Screen.width/2) - 90,10,80,20),"Username:");
+			GUI.Label(new Rect((Screen.width/2) - 90,30,80,20),"Password:");
+			GUI.Label(new Rect((Screen.width/2) - 90,50,80,20),"Confirm password");
+			GUI.Label(new Rect((Screen.width/2) - 90,70,80,20),"E-mail:");
 			
-			username = GUI.TextField(new Rect(90,10,100,20),username);
-			password = GUI.PasswordField(new Rect(90,30,100,20),password, '*');
-			cPassword = GUI.PasswordField(new Rect(90,50,100,20),cPassword, '*');
-			email = GUI.TextField(new Rect(90,70,100,20),email);
+			username = GUI.TextField(new Rect((Screen.width/2) - 10,10,100,20),username);
+			password = GUI.PasswordField(new Rect((Screen.width/2) - 10,30,100,20),password, '*');
+			cPassword = GUI.PasswordField(new Rect((Screen.width/2) - 10,50,100,20),cPassword, '*');
+			email = GUI.TextField(new Rect((Screen.width/2) - 10,70,100,20),email);
 			
 			
-			if(GUI.Button(new Rect(10,100,100,20),"Submit")){
+			if(GUI.Button(new Rect((Screen.width/2) - 90,100,100,20),"Submit")){
 				bool sucess = AddUser();
 				if(sucess){
 					newUser = false;
 				}
 			}
-			if(GUI.Button(new Rect(110,100,100,20),"Cancel")){
+			if(GUI.Button(new Rect((Screen.width/2) + 10,100,100,20),"Cancel")){
 				newUser = false;
 			}
-			GUI.TextArea(new Rect(10,150,500,500),formText);
+			GUI.TextArea(new Rect((Screen.width/2) - 125,150,300,300),formText);
 		}
 	}
-	void Login(){
+	bool LoginWeb(){
 //		WWWForm form = new WWWForm();
 //		form.AddField("hash",hash);
 //		form.AddField("un",username);
@@ -68,8 +74,9 @@ public class LogIn : MonoBehaviour {
 //			Debug.Log(w.error);
 //		}
 //		else{
-//			
+//			//check here to see if username and password match.
 //		}
+		return true;
 	}
 	
 	bool AddUser(){
@@ -85,7 +92,7 @@ public class LogIn : MonoBehaviour {
 		}
 		
 		if(addU){
-			//add user after seeing if it is in the data base first. 
+			//add user after seeing if it is not in the data base first. 
 			return addU;
 		}
 		else{

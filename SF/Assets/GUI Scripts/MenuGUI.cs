@@ -19,8 +19,8 @@ public class MenuGUI : MonoBehaviour {
 		if(GUI.Button(new Rect(0,400,150,100),"Load Farmer stuff")){
 			Application.LoadLevel ("Test_Farm");
 		}
-		if(GUI.Button(new Rect(0,500,150,100),"Exit")){
-			Application.Quit();
+		if(GUI.Button(new Rect(0,500,150,100),"Info")){
+			Application.OpenURL("https://github.com/zombiepaladin/CI-Team/wiki");
 		}
 	}
 }
