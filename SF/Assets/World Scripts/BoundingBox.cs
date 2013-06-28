@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class BoundingBox : MonoBehaviour {
 	
+	public int sizeofbound;
+	
 	public GameObject cube;
 	
 	public GameObject terrain;
@@ -13,26 +15,41 @@ public class BoundingBox : MonoBehaviour {
 	int cn = 0;
 	// Use this for initialization
 	void Start () {
-		for(int i = 0; i < 101;i++){
+		
+		int cubeSize = (int)cube.transform.localScale.x;
+		Debug.Log (cubeSize);
+		for(int i = 0; i < sizeofbound+1;i++){
 			instanceCubes.Add((GameObject)Instantiate(cube,new Vector3(0,1,i),Quaternion.identity));
 			instanceCubes[cn].name = "BoundingCube"+cn;
 			cn++;
+			if(cubeSize > 1){
+				i += cubeSize-1;
+			}
 		}
-		for(int i = 1; i < 101;i++){
+		for(int i = 1; i < sizeofbound+1;i++){
 			instanceCubes.Add((GameObject)Instantiate(cube,new Vector3(i,1,0),Quaternion.identity));
 			instanceCubes[cn].name = "BoundingCube"+cn;
 			cn++;
+			if(cubeSize > 1){
+				i += cubeSize-1;
+			}
 		}
 		
-		for(int i = 100; i > 0; i--){
-			instanceCubes.Add((GameObject)Instantiate(cube,new Vector3(100,1,i),Quaternion.identity));
+		for(int i = 1000; i > 0; i--){
+			instanceCubes.Add((GameObject)Instantiate(cube,new Vector3(1000,1,i),Quaternion.identity));
 			instanceCubes[cn].name = "BoundingCube"+cn;
 			cn++;
+			if(cubeSize > 1){
+				i -= cubeSize-1;
+			}
 		}
-		for(int i = 100; i > 0; i--){
-			instanceCubes.Add((GameObject)Instantiate(cube,new Vector3(i,1,100),Quaternion.identity));
+		for(int i = 1000; i > 0; i--){
+			instanceCubes.Add((GameObject)Instantiate(cube,new Vector3(i,1,1000),Quaternion.identity));
 			instanceCubes[cn].name = "BoundingCube"+cn;
 			cn++;
+			if(cubeSize > 1){
+				i -= cubeSize-1;
+			}
 		}
 	}
 	
