@@ -10,6 +10,9 @@ using System.IO;
 /// </summary>
 public class SFField {
 	[SerializeThis]
+	Vector3 playerPos;
+	
+	[SerializeThis]
 	int hmWidth;
 	
 	[SerializeThis]
@@ -121,15 +124,7 @@ public class SFField {
 		return am;
 	}
 	
-	/// <summary>
-	/// Gets the crops.
-	/// </summary>
-	/// <returns>
-	/// The crops.
-	/// </returns>
-	public List<Vector4> getCrops(){
-		return plantPos;
-	}
+
 	
 	/// <summary>
 	/// Adds a single Crop to the List of crops.
@@ -149,6 +144,24 @@ public class SFField {
 	/// </param>
 	public void setCrops(List<Vector4> cropPos){
 		plantPos = cropPos;
+	}
+	
+	/// <summary>
+	/// Gets the crops.
+	/// </summary>
+	/// <returns>
+	/// The crops.
+	/// </returns>
+	public List<Vector4> getCrops(){
+		return plantPos;
+	}
+	
+	public void setPP(Vector3 v){
+		playerPos = v;
+	}
+	
+	public Vector3 getPP(){
+		return playerPos;
 	}
 	
 }

@@ -35,9 +35,8 @@ public class AITractor : MonoBehaviour {
 	float cropSpace = 10.0f;
 	float moved = 0.0f;
 	float startingPoint = 50.0f;
-	Crop c;
-	
-	List<Vector3> cropPos = new List<Vector3>();
+	Crop crop;
+	bool loaded = false;
 	
 	/*
 	 * This is ran during the start up of the scene. 
@@ -45,12 +44,13 @@ public class AITractor : MonoBehaviour {
 	 * 
 	*/ 
 	void Start () {
-		//c = new Crop(CropPass.getCrop(0));
+		crop = new Crop();
 		waypoints = new WaypointFPT(terrain);
 		waypoints.genPointsStr(new Vector3(50,0,50),true);
 		tractorAI = (GameObject)Instantiate(objPre,new Vector3(50,0,50),Quaternion.identity);
 		tractorAI.name = "AI Tractor FP";
 		if(PlayerPrefs.GetString("FieldName") == ""){
+			crop.setType(PlayerPrefs.GetInt("CropType"));
 			FieldName = PlayerPrefs.GetString("NFName");
 			alphatext = new float[terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,2];
 			for(int i = 0; i < terrain.GetComponent<Terrain>().terrainData.alphamapWidth; i++){
@@ -71,11 +71,13 @@ public class AITractor : MonoBehaviour {
 			FieldName = PlayerPrefs.GetString("FieldName");
 			byte[] load = sf.Load (PlayerPrefs.GetString("FieldName"));
 			UnitySerializer.DeserializeInto(load,sf);
+			crop.setField(sf.getCrops());
 			tractorAI.transform.position += new Vector3(0,15,0);
 			terrain.GetComponent<Terrain>().terrainData.SetHeights(0,0,sf.getHM ());
 			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,sf.getAM());
 			alphatext = sf.getAM();
 			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
+			loaded = true;
 		}
 		
 	}
@@ -89,6 +91,7 @@ public class AITractor : MonoBehaviour {
 		if(Input.GetKeyUp(KeyCode.F1)){
 			sf.setAM(alphatext,terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,terrain.GetComponent<Terrain>().terrainData.alphamapLayers);
 			sf.setHM (terrain.GetComponent<Terrain>().terrainData.GetHeights(0,0,terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight),terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight);
+			sf.setCrops(crop.getPosAsVec4());
 			sf.Save (FieldName);
 			Debug.Log ("Bob");
 		}
@@ -123,13 +126,17 @@ public class AITractor : MonoBehaviour {
 		}
 		if(isline){
 			moved = Mathf.Abs(tractorAI.transform.position.z - startingPoint);
-			Debug.Log (moved);
 		}
-		if(moved >= cropSpace && isline){
+		if(moved >= cropSpace && isline && !loaded){
 			
-			//c.PlantCrop(new Vector3(tractorAI.transform.position.x,tractorAI.transform.position.y,tractorAI.transform.position.z-2.0f));
+			crop.PlantCrop(new Vector3(tractorAI.transform.position.x,tractorAI.transform.position.y,tractorAI.transform.position.z-2.0f));
 			moved = 0.0f;
 			startingPoint = tractorAI.transform.position.z;
+		}
+		if(loaded){
+			if(crop.lastPlant(tractorAI.transform.position)){
+				loaded = false;
+			}
 		}
 		Vector3 localPos = tractorAI.transform.position - terrain.transform.position;
 		Vector3 normalPos = new Vector3((localPos.x/terrain.GetComponent<Terrain>().terrainData.size.x) * terrain.GetComponent<Terrain>().terrainData.alphamapWidth,

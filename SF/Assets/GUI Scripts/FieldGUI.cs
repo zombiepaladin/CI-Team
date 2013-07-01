@@ -5,15 +5,19 @@ using System.IO;
 
 public class FieldGUI : MonoBehaviour {
 	
-	//string[] files;
+	string[] files;
+	
+	string[] crops = {"corn","wheat","soy","grass"};
 	
 	bool nf = false;
 	bool une = true;
 	string fn = "Enter Field Name";
 	string un = "UserName";
+	Vector2 sb = Vector2.zero;
+	int selected = 0;
 	
 	void Start(){
-		//files = System.IO.Directory.GetFiles(Application.dataPath + "\\SFFields\\");
+		files = System.IO.Directory.GetFiles(Application.dataPath + "\\SFFields\\");
 	}
 	
 	void OnGUI(){
@@ -27,16 +31,18 @@ public class FieldGUI : MonoBehaviour {
 				PlayerPrefs.SetString("FieldName","");
 				nf = true;
 			}
-//			foreach(string s in files){
-//				string s1 = s.Remove(0, (Application.dataPath + "\\SFFields\\").Length);
-//				if(!s1.Contains(".meta")){
-//				s1 = s1.Remove (s1.IndexOf('.'));
-//				if(GUILayout.Button(s1)){
-//					PlayerPrefs.SetString("FieldName",s1);
-//					Application.LoadLevel("AI Tractor");
-//				}
-//				}
-//			}
+			sb = GUILayout.BeginScrollView(sb,gs);
+			foreach(string s in files){
+				string s1 = s.Remove(0, (Application.dataPath + "\\SFFields\\").Length);
+				if(!s1.Contains(".meta")){
+				s1 = s1.Remove (s1.IndexOf('.'));
+				if(GUILayout.Button(s1)){
+					PlayerPrefs.SetString("FieldName",s1);
+					Application.LoadLevel("AI Tractor");
+				}
+				}
+			}
+			GUILayout.EndScrollView();
 			GUILayout.FlexibleSpace();
     		GUILayout.EndVertical();
     		GUILayout.EndArea();
@@ -47,8 +53,12 @@ public class FieldGUI : MonoBehaviour {
 			GUILayout.BeginVertical(); 
     		GUILayout.FlexibleSpace();
 			fn = GUILayout.TextField(fn);
+			sb = GUILayout.BeginScrollView(sb,gs);
+			selected = GUILayout.SelectionGrid(selected,crops,1);
+			GUILayout.EndScrollView();
 			if(GUILayout.Button("OK")){
-				PlayerPrefs.SetString("NFName",name);
+				PlayerPrefs.SetString("NFName",fn);
+				PlayerPrefs.SetInt("CropType",selected);
 				Application.LoadLevel("AI Tractor");
 			}
 			if(GUILayout.Button("Cancel")){

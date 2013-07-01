@@ -55,7 +55,7 @@ public class BS{
 	/// The file name that needs to be loaded.
 	/// </param>
 	public static byte[] Load(string fn){
-            FileStream fs = new FileStream(fn, FileMode.Open);
+            FileStream fs = new FileStream(Application.dataPath + "\\SFFields\\" + fn +".sffd", FileMode.Open);
             BinaryReader br = new BinaryReader(fs);
             string openS = "";
             openS = br.ReadString();
