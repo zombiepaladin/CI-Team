@@ -101,7 +101,7 @@ public class AITractor : MonoBehaviour {
 		if(currentPoint > waypoints.points.Count){
 			if(isline){
 				isline = false;
-				waypoints.genPointsTurn(tractorAI.GetComponent<Transform>().position);
+				waypoints.genPointsTurn(tractorAI.GetComponent<Transform>().position,isPos);
 				TotalTime = 0;
 				moved = 0.0f;
 			}
