@@ -32,6 +32,12 @@ public class AITractor : MonoBehaviour {
 	float[,,] alphatext;
 	SFField sf = new SFField();
 	string FieldName = "";
+	float cropSpace = 10.0f;
+	float moved = 0.0f;
+	float startingPoint = 50.0f;
+	Crop c;
+	
+	List<Vector3> cropPos = new List<Vector3>();
 	
 	/*
 	 * This is ran during the start up of the scene. 
@@ -39,11 +45,11 @@ public class AITractor : MonoBehaviour {
 	 * 
 	*/ 
 	void Start () {
+		//c = new Crop(CropPass.getCrop(0));
 		waypoints = new WaypointFPT(terrain);
 		waypoints.genPointsStr(new Vector3(50,0,50),true);
 		tractorAI = (GameObject)Instantiate(objPre,new Vector3(50,0,50),Quaternion.identity);
 		tractorAI.name = "AI Tractor FP";
-		Debug.Log (PlayerPrefs.GetString("FieldName"));
 		if(PlayerPrefs.GetString("FieldName") == ""){
 			FieldName = PlayerPrefs.GetString("NFName");
 			alphatext = new float[terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,2];
@@ -86,14 +92,6 @@ public class AITractor : MonoBehaviour {
 			sf.Save (FieldName);
 			Debug.Log ("Bob");
 		}
-		if(Input.GetKeyUp (KeyCode.F2)){
-			byte[] load = sf.Load ("test.sffd");
-			UnitySerializer.DeserializeInto(load,sf);
-			tractorAI.transform.position += new Vector3(0,15,0);
-			terrain.GetComponent<Terrain>().terrainData.SetHeights(0,0,sf.getHM ());
-			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,sf.getAM());
-			alphatext = sf.getAM();
-		}
 		TotalTime += Time.deltaTime;
 		currentPoint = Mathf.Floor(TotalTime/lerpRate);
 		float offsetTime = TotalTime - (currentPoint*lerpRate);
@@ -102,6 +100,7 @@ public class AITractor : MonoBehaviour {
 				isline = false;
 				waypoints.genPointsTurn(tractorAI.GetComponent<Transform>().position);
 				TotalTime = 0;
+				moved = 0.0f;
 			}
 			else if(!isline){
 				if(isPos){
@@ -109,6 +108,7 @@ public class AITractor : MonoBehaviour {
 					isPos = false;
 					waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
 					TotalTime = 0;
+					startingPoint = tractorAI.transform.position.z;
 				}
 				else if(!isPos){;
 					isline = true;
@@ -121,12 +121,23 @@ public class AITractor : MonoBehaviour {
 		else{
 			tractorAI.transform.position = waypoints.points[(int)currentPoint]+offsetTime*(waypoints.points[(int)currentPoint+1]-waypoints.points[(int)currentPoint]);
 		}
-			Vector3 localPos = tractorAI.transform.position - terrain.transform.position;
-			Vector3 normalPos = new Vector3((localPos.x/terrain.GetComponent<Terrain>().terrainData.size.x) * terrain.GetComponent<Terrain>().terrainData.alphamapWidth,
-				0,
-				(localPos.z/terrain.GetComponent<Terrain>().terrainData.size.z) * terrain.GetComponent<Terrain>().terrainData.alphamapHeight);
-			alphatext[(int)normalPos.z,(int)normalPos.x,0] = 0;
-			alphatext[(int)normalPos.z,(int)normalPos.x,1] = 1;
-			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
+		if(isline){
+			moved = Mathf.Abs(tractorAI.transform.position.z - startingPoint);
+			Debug.Log (moved);
+		}
+		if(moved >= cropSpace && isline){
+			
+			//c.PlantCrop(new Vector3(tractorAI.transform.position.x,tractorAI.transform.position.y,tractorAI.transform.position.z-2.0f));
+			moved = 0.0f;
+			startingPoint = tractorAI.transform.position.z;
+		}
+		Vector3 localPos = tractorAI.transform.position - terrain.transform.position;
+		Vector3 normalPos = new Vector3((localPos.x/terrain.GetComponent<Terrain>().terrainData.size.x) * terrain.GetComponent<Terrain>().terrainData.alphamapWidth,
+			0,
+			(localPos.z/terrain.GetComponent<Terrain>().terrainData.size.z) * terrain.GetComponent<Terrain>().terrainData.alphamapHeight);
+		alphatext[(int)normalPos.z,(int)normalPos.x,0] = 0;
+		alphatext[(int)normalPos.z,(int)normalPos.x,1] = 1;
+		terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
+		
 	}
 }

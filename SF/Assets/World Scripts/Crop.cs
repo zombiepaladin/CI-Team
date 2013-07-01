@@ -2,46 +2,32 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Crop : MonoBehaviour{
-	enum PlantType{
-		corn = 0,
-		wheat = 1,
-		grass = 2,
-	};
+public class Crop{
 	
-	public List<GameObject> crops;
+	GameObject cr;
+	
+	List<GameObject> pantedCrops = new List<GameObject>();
 	
 	List<Vector3> positions = new List<Vector3>();
 	
-	PlantType crop = new PlantType();
-	
-	public Crop(int type){
-		switch(type){
-		case 0:
-			crop = PlantType.corn;
-			break;
-		case 1:
-			crop = PlantType.wheat;
-			break;
-		default:
-			crop = PlantType.grass;
-			break;
-		}
+
+	public Crop(GameObject c){
+		cr = c;
 	}
 	
 	public void PlantCrop(Vector3 pos){
-		
-		switch(crop){
-		case PlantType.corn:
-			//draw an instance of corn at pos
-			break;
-		case PlantType.wheat:
-			//same as above
-			break;
-		}
+		positions.Add(pos);
+		pantedCrops.Add((GameObject)GameObject.Instantiate(cr,pos,Quaternion.identity));
+	}
+	
+	public List<GameObject> getPlantedCrops(){
+		return pantedCrops;
 	}
 	
 	public List<Vector3> getPositions(){
-		return positions;
+		return positions;	
+	}
+	public GameObject getCrop(){
+		return cr;
 	}
 }

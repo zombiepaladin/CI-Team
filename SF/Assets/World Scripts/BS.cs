@@ -63,7 +63,7 @@ public class BS{
             return BS.Decompress(openS);
 	}
 	
-	/// <summary>
+	/// <summary> 
 	/// Decompress the specified data.
 	/// </summary>
 	/// <param name='data'>
