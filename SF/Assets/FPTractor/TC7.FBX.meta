@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ec929bcd472772448a4bdecc4667cfd6
+guid: 4baaa307da0cfa84bb895e36d11f331f
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
@@ -396,7 +396,6 @@ ModelImporter:
     4300124: Group#1_001
     4300126: Group#2_001
     4300128: Group#1_002
-    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -428,9 +427,9 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
-    normalImportMode: 1
+    normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
