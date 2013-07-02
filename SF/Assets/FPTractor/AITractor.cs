@@ -47,7 +47,7 @@ public class AITractor : MonoBehaviour {
 		crop = new Crop();
 		waypoints = new WaypointFPT(terrain);
 		waypoints.genPointsStr(new Vector3(50,0,50),true);
-		tractorAI = (GameObject)Instantiate(objPre,new Vector3(50,0,50),Quaternion.identity);
+		tractorAI = (GameObject)Instantiate(objPre,new Vector3(50,.3f,50),Quaternion.identity);
 		tractorAI.name = "AI Tractor FP";
 		if(PlayerPrefs.GetString("FieldName") == ""){
 			crop.setType(PlayerPrefs.GetInt("CropType"));
@@ -129,7 +129,7 @@ public class AITractor : MonoBehaviour {
 		}
 		if(moved >= cropSpace && isline && !loaded){
 			
-			crop.PlantCrop(new Vector3(tractorAI.transform.position.x,tractorAI.transform.position.y,tractorAI.transform.position.z-2.0f));
+			crop.PlantCrop(new Vector3(tractorAI.transform.position.x,tractorAI.transform.position.y,tractorAI.transform.position.z-3.0f));
 			moved = 0.0f;
 			startingPoint = tractorAI.transform.position.z;
 		}

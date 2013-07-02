@@ -5,7 +5,7 @@ using System.IO;
 
 public class FieldGUI : MonoBehaviour {
 	
-	string[] files;
+	//string[] files;
 	
 	string[] crops = {"corn","wheat","soy","grass"};
 	
@@ -17,7 +17,7 @@ public class FieldGUI : MonoBehaviour {
 	int selected = 0;
 	
 	void Start(){
-		files = System.IO.Directory.GetFiles(Application.dataPath + "\\SFFields\\");
+		//files = System.IO.Directory.GetFiles(Application.dataPath + "\\SFFields\\");
 	}
 	
 	void OnGUI(){
@@ -32,16 +32,16 @@ public class FieldGUI : MonoBehaviour {
 				nf = true;
 			}
 			sb = GUILayout.BeginScrollView(sb,gs);
-			foreach(string s in files){
-				string s1 = s.Remove(0, (Application.dataPath + "\\SFFields\\").Length);
-				if(!s1.Contains(".meta")){
-				s1 = s1.Remove (s1.IndexOf('.'));
-				if(GUILayout.Button(s1)){
-					PlayerPrefs.SetString("FieldName",s1);
-					Application.LoadLevel("AI Tractor");
-				}
-				}
-			}
+//			foreach(string s in files){
+//				string s1 = s.Remove(0, (Application.dataPath + "\\SFFields\\").Length);
+//				if(!s1.Contains(".meta")){
+//				s1 = s1.Remove (s1.IndexOf('.'));
+//				if(GUILayout.Button(s1)){
+//					PlayerPrefs.SetString("FieldName",s1);
+//					Application.LoadLevel("AI Tractor");
+//				}
+//				}
+			//}
 			GUILayout.EndScrollView();
 			GUILayout.FlexibleSpace();
     		GUILayout.EndVertical();
