@@ -1,9 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\World Scripts\BoundingBox.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FPTractor\TractorFrame.cs">
     <Files>
+      <File FileName="Assets\FPTractor\TractorFrame.cs" Line="25" Column="234" />
       <File FileName="Assets\GUI Scripts\GreenScreen.cs" Line="21" Column="30" />
-      <File FileName="Assets\FPTractor\TractorFrame.cs" Line="19" Column="4" />
       <File FileName="Assets\FPTractor\WaypointFPT.cs" Line="70" Column="17" />
       <File FileName="Assets\GUI Scripts\FieldGUI.cs" Line="57" Column="6" />
       <File FileName="Assets\World Scripts\Crop.cs" Line="111" Column="18" />
