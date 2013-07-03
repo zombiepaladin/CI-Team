@@ -24,7 +24,7 @@ public class FieldGUI : MonoBehaviour {
 		 * this if is for the loading field screen.
 		 * 
 		 */
-		if(!nf && une){
+		if(!nf){
 			GUIStyle gs = "box";
 			GUILayout.BeginArea(new Rect(Screen.width/2 - 200,Screen.height/2 - 300, 400, 600),gs);
 			GUILayout.BeginVertical(); 
@@ -55,7 +55,7 @@ public class FieldGUI : MonoBehaviour {
 		 * this if statement is for new terrains
 		 * 
 		 */
-		else if(nf && une){
+		else if(nf){
 			GUIStyle gs = "box";
 			GUILayout.BeginArea(new Rect(Screen.width/2 - 200,Screen.height/2 - 300, 400, 600),gs);
 			GUILayout.BeginVertical(); 
