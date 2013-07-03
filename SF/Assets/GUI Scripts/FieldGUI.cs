@@ -10,7 +10,6 @@ public class FieldGUI : MonoBehaviour {
 	string[] crops = {"corn","wheat","soy","grass"};
 	
 	bool nf = false;
-	bool une = true;
 	string fn = "Enter Field Name";
 	string un = "UserName";
 	Vector2 sb = Vector2.zero;
@@ -21,6 +20,10 @@ public class FieldGUI : MonoBehaviour {
 	}
 	
 	void OnGUI(){
+		/*
+		 * this if is for the loading field screen.
+		 * 
+		 */
 		if(!nf && une){
 			GUIStyle gs = "box";
 			GUILayout.BeginArea(new Rect(Screen.width/2 - 200,Screen.height/2 - 300, 400, 600),gs);
@@ -47,6 +50,11 @@ public class FieldGUI : MonoBehaviour {
     		GUILayout.EndVertical();
     		GUILayout.EndArea();
 		}
+		
+		/*
+		 * this if statement is for new terrains
+		 * 
+		 */
 		else if(nf && une){
 			GUIStyle gs = "box";
 			GUILayout.BeginArea(new Rect(Screen.width/2 - 200,Screen.height/2 - 300, 400, 600),gs);
@@ -68,20 +76,6 @@ public class FieldGUI : MonoBehaviour {
     		GUILayout.EndVertical();
     		GUILayout.EndArea();
 		}
-		else{
-			GUIStyle gs = "box";
-			GUILayout.BeginArea(new Rect(Screen.width/2 - 200,Screen.height/2 - 300, 400, 600),gs);
-			GUILayout.BeginVertical(); 
-    		GUILayout.FlexibleSpace();
-			GUILayout.Space(60);
-			un = GUILayout.TextField(un);
-			if(GUILayout.Button("Ok")){
-				PlayerPrefs.SetString("UserName",un);
-				une = true;
-			}
-			GUILayout.FlexibleSpace();
-    		GUILayout.EndVertical();
-    		GUILayout.EndArea();
-		}
+		
 	}
 }
