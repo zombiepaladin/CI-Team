@@ -10,30 +10,57 @@ using System.IO;
 /// </summary>
 public class SFField {
 	[SerializeThis]
+	/// <summary>
+	/// The player position.
+	/// </summary>
 	Vector3 playerPos;
 	
 	[SerializeThis]
+	/// <summary>
+	/// The width of the hm.
+	/// </summary>
 	int hmWidth;
 	
 	[SerializeThis]
+	/// <summary>
+	/// The height of the hm.
+	/// </summary>
  	int hmHeight;
 	
 	[SerializeThis]
+	/// <summary>
+	/// The width of the am.
+	/// </summary>
 	int amWidth;
 	
 	[SerializeThis]
+	/// <summary>
+	/// The height of the am.
+	/// </summary>
 	int amHeight;
 	
 	[SerializeThis]
+	/// <summary>
+	/// The am layers.
+	/// </summary>
 	int amLayers;
 	
 	[SerializeThis]
+	/// <summary>
+	/// The hm.
+	/// </summary>
 	float[,] hm;
 	
 	[SerializeThis]
+	/// <summary>
+	/// The am.
+	/// </summary>
 	float[,,] am;
 	
 	[SerializeThis]
+	/// <summary>
+	/// The plant position.
+	/// </summary>
 	List<Vector4> plantPos = new List<Vector4>();
 	
 	

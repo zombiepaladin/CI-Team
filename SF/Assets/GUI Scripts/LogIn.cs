@@ -16,7 +16,12 @@ public class LogIn : MonoBehaviour {
 	bool newUser = false;
 	bool displayed1 = false;
 	bool displayed2 = false;
+	
 	void OnGUI(){
+		/*
+		 * this if showes the login screen.
+		 * 
+		 */
 		if(!newUser){
 			GUI.Label(new Rect((Screen.width/2) - 90,10,80,20),"Username:");
 			GUI.Label(new Rect((Screen.width/2) - 90,30,80,20),"Password:");
@@ -38,6 +43,10 @@ public class LogIn : MonoBehaviour {
 			}
 			GUI.TextArea(new Rect((Screen.width/2) - 125,150,300,300),formText);
 		}
+		/*
+		 * this shows the create new user screen.
+		 * 
+		 */
 		else{
 
 			
@@ -64,6 +73,13 @@ public class LogIn : MonoBehaviour {
 			GUI.TextArea(new Rect((Screen.width/2) - 125,150,300,300),formText);
 		}
 	}
+	
+	/// <summary>
+	/// Logins the web.
+	/// </summary>
+	/// <returns>
+	/// if sucessfull.
+	/// </returns>
 	bool LoginWeb(){
 //		WWWForm form = new WWWForm();
 //		form.AddField("hash",hash);
@@ -79,6 +95,12 @@ public class LogIn : MonoBehaviour {
 		return true;
 	}
 	
+	/// <summary>
+	/// Adds the user.
+	/// </summary>
+	/// <returns>
+	/// if Sucessfull.
+	/// </returns>
 	bool AddUser(){
 		bool addU = true;
 		if(password.Length <= 6){
