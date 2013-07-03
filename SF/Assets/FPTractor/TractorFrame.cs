@@ -7,7 +7,7 @@ public class TractorFrame : MonoBehaviour {
 	public GameObject frame;
 	private GameObject	instancedFrame;
 	void Start () {
-		instancedFrame = (GameObject)Instantiate(frame,new Vector3(tractor.GetComponent<Transform>().position.x,tractor.GetComponent<Transform>().position.y,tractor.GetComponent<Transform>().position.z+.25f),new Quaternion(0,0,0,0));
+		instancedFrame = (GameObject)Instantiate(frame,new Vector3(tractor.GetComponent<Transform>().position.x,tractor.GetComponent<Transform>().position.y+.15f,tractor.GetComponent<Transform>().position.z+.25f),new Quaternion(0,0,0,0));
 		instancedFrame.GetComponent<Transform>().localScale = new Vector3(2.2f,2.2f,2.2f);
 	}
 	
@@ -22,6 +22,6 @@ public class TractorFrame : MonoBehaviour {
 			instancedFrame.GetComponent<Transform>().rotation = new Quaternion(instancedFrame.GetComponent<Transform>().rotation.x,instancedFrame.GetComponent<Transform>().rotation.y+(.001f),instancedFrame.GetComponent<Transform>().rotation.z,instancedFrame.GetComponent<Transform>().rotation.w);
 			
 		}
-		instancedFrame.GetComponent<Transform>().position = new Vector3(tractor.GetComponent<Transform>().position.x,tractor.GetComponent<Transform>().position.y,tractor.GetComponent<Transform>().position.z+.25f);
+		instancedFrame.GetComponent<Transform>().position = new Vector3(tractor.GetComponent<Transform>().position.x,tractor.GetComponent<Transform>().position.y+.15f,tractor.GetComponent<Transform>().position.z+.25f);
 	}
 }
