@@ -7,6 +7,8 @@ public class FieldGUI : MonoBehaviour {
 	
 	//string[] files;
 	
+	
+	
 	string[] crops = {"corn","wheat","soy","grass"};
 	
 	bool nf = false;

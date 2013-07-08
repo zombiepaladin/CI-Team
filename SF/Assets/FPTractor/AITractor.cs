@@ -92,7 +92,8 @@ public class AITractor : MonoBehaviour {
 			sf.setAM(alphatext,terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,terrain.GetComponent<Terrain>().terrainData.alphamapLayers);
 			sf.setHM (terrain.GetComponent<Terrain>().terrainData.GetHeights(0,0,terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight),terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight);
 			sf.setCrops(crop.getPosAsVec4());
-			sf.Save (FieldName);
+			sf.SaveToWeb(FieldName);
+			//sf.Save (FieldName);
 			Debug.Log ("Bob");
 		}
 		TotalTime += Time.deltaTime;

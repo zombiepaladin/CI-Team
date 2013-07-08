@@ -10,6 +10,7 @@ using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 
 public class BS{
 	
+	
 	/// <summary>
 	/// Save the specified data in the file.
 	/// </summary>
@@ -30,23 +31,14 @@ public class BS{
 	}
 	
 	public static void SaveToWeb(byte[] d, string fn, string un){
-		WWWForm form = new WWWForm();
-		string query = "INSERT INTO Fields(FieldName, UserName, CompressedString) VALUES "+fn+","+un+","+BS.Compress(d)+")";
-		form.AddField("q", query);
-		string results = "";
-		form.AddField ("r", results);
-		WWW w = new WWW("www.cis.ksu.edu/~borzen/php_save.php",form);
-		if(w.error != null){
-			Debug.Log (w.error.ToString());
-		}
-		else{
-			
-			Debug.Log (System.Text.Encoding.Default.GetString(form.data));
-			Debug.Log ("bob");
-		}
-		w.Dispose();
+		string query = "\'INSERT INTO Fields(FieldName, UserName, CompressedString) VALUES (\""+fn+"\",\""+un+"\",\""+BS.Compress(d)+"\")\'";
+		Application.ExternalCall("RunPHPSave",query);
 	}
 	
+	
+	public static void saveFarm(string cs){
+		
+	}
 	
 	/// <summary>
 	/// Load the specified File.
@@ -80,6 +72,19 @@ public class BS{
 		z.Close();
 		m.Close();
 		return output;
+	}
+	
+	public static string LoadFromWeb(string id){
+		WWWForm form = new WWWForm();
+		string query = "SELECT CompressedString FROM Fields WHERE PK_ID = "+id;
+		form.AddField("q",query);
+		string cs = "";
+		form.AddField("cs",cs);
+		return null;
+	}
+	
+	public static void loadFarm(string cs){
+		
 	}
 	
 	/// <summary>
