@@ -10,6 +10,7 @@ using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 
 public class BS{
 	
+	public static byte[] field;
 	
 	/// <summary>
 	/// Save the specified data in the file.
@@ -33,11 +34,6 @@ public class BS{
 	public static void SaveToWeb(byte[] d, string fn, string un){
 		string query = "\'INSERT INTO Fields(FieldName, UserName, CompressedString) VALUES (\""+fn+"\",\""+un+"\",\""+BS.Compress(d)+"\")\'";
 		Application.ExternalCall("RunPHPSave",query);
-	}
-	
-	
-	public static void saveFarm(string cs){
-		
 	}
 	
 	/// <summary>
@@ -74,17 +70,12 @@ public class BS{
 		return output;
 	}
 	
-	public static string LoadFromWeb(string id){
-		WWWForm form = new WWWForm();
-		string query = "SELECT CompressedString FROM Fields WHERE PK_ID = "+id;
-		form.AddField("q",query);
-		string cs = "";
-		form.AddField("cs",cs);
-		return null;
+	public static void LoadFromWeb(int id){
+		Application.ExternalCall("loadField",id);
 	}
 	
-	public static void loadFarm(string cs){
-		
+	public static void LoadFarm(string cs){
+		field = Decompress(cs);
 	}
 	
 	/// <summary>

@@ -5,8 +5,9 @@ using System.IO;
 
 public class FieldGUI : MonoBehaviour {
 	
-	//string[] files;
+	Dictionary<string,int> fnD = new Dictionary<string, int>();
 	
+	List<string> fns = new List<string>();
 	
 	
 	string[] crops = {"corn","wheat","soy","grass"};
@@ -17,8 +18,18 @@ public class FieldGUI : MonoBehaviour {
 	Vector2 sb = Vector2.zero;
 	int selected = 0;
 	
+	bool empty = true;
+	
 	void Start(){
-		//files = System.IO.Directory.GetFiles(Application.dataPath + "\\SFFields\\");
+		Application.ExternalCall("getField");
+	}
+	
+	public void getFields(string[] a, string[] b){
+		for(int i = 0; i < a.Length;i++){
+			fnD.Add(b[i],int.Parse(a[i]));
+			fns.Add(b[i]);
+		}
+		empty = false;
 	}
 	
 	void OnGUI(){
@@ -37,16 +48,15 @@ public class FieldGUI : MonoBehaviour {
 				nf = true;
 			}
 			sb = GUILayout.BeginScrollView(sb,gs);
-//			foreach(string s in files){
-//				string s1 = s.Remove(0, (Application.dataPath + "\\SFFields\\").Length);
-//				if(!s1.Contains(".meta")){
-//				s1 = s1.Remove (s1.IndexOf('.'));
-//				if(GUILayout.Button(s1)){
-//					PlayerPrefs.SetString("FieldName",s1);
-//					Application.LoadLevel("AI Tractor");
-//				}
-//				}
-			//}
+			if(!empty){
+			foreach(string s in fns){
+				if(GUILayout.Button(s)){
+					PlayerPrefs.SetString("FieldName",s);
+					PlayerPrefs.SetInt ("FieldPK",fnD[s]);
+					Application.LoadLevel("AI Tractor");
+				}
+			}
+			}
 			GUILayout.EndScrollView();
 			GUILayout.FlexibleSpace();
     		GUILayout.EndVertical();

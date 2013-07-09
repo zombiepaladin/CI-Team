@@ -91,6 +91,16 @@ public class SFField {
 		return seralized;
 	}
 	
+	public byte[] LoadFromWeb(int id){
+		BS.LoadFromWeb(id);
+		while(BS.field == null){
+			if(BS.field != null){
+				break;
+			}
+		}
+		return BS.field;
+	}
+	
 	/// <summary>
 	/// Sets the height map.
 	/// </summary>
