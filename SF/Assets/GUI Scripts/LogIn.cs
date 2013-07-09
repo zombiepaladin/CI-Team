@@ -81,17 +81,7 @@ public class LogIn : MonoBehaviour {
 	/// if sucessfull.
 	/// </returns>
 	bool LoginWeb(){
-//		WWWForm form = new WWWForm();
-//		form.AddField("hash",hash);
-//		form.AddField("un",username);
-//		form.AddField("password",password);
-//		WWW w = new WWW(URL,form);
-//		if(w.error != null){
-//			Debug.Log(w.error);
-//		}
-//		else{
-//			//check here to see if username and password match.
-//		}
+		
 		return true;
 	}
 	
@@ -114,7 +104,7 @@ public class LogIn : MonoBehaviour {
 		}
 		
 		if(addU){
-			//add user after seeing if it is not in the data base first. 
+			//add user after seeing if it is not in the database first. 
 			return addU;
 		}
 		else{

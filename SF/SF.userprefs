@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GUI Scripts\FieldGUI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GUI Scripts\LogIn.cs">
     <Files>
-      <File FileName="Assets\GUI Scripts\FieldGUI.cs" Line="29" Column="32" />
+      <File FileName="Assets\GUI Scripts\LogIn.cs" Line="84" Column="3" />
+      <File FileName="Assets\GUI Scripts\FieldGUI.cs" Line="12" Column="2" />
       <File FileName="Assets\World Scripts\BS.cs" Line="74" Column="44" />
       <File FileName="Assets\FPTractor\AITractor.cs" Line="70" Column="8" />
       <File FileName="Assets\World Scripts\SFField.cs" Line="101" Column="19" />
