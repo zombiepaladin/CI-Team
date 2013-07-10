@@ -13,12 +13,12 @@ public class TractorFrame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) && frame.transform.localRotation.y < 45){
+		if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)){
 			instancedFrame.GetComponent<Transform>().rotation = new Quaternion(instancedFrame.GetComponent<Transform>().rotation.x,instancedFrame.GetComponent<Transform>().rotation.y-(.01f),instancedFrame.GetComponent<Transform>().rotation.z,instancedFrame.GetComponent<Transform>().rotation.w);
 			
 		}
 	
-		if((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))&& (frame.GetComponent<Transform>().rotation.y < 315 && frame.GetComponent<Transform>().rotation.y >= 0)){
+		if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)){
 			instancedFrame.GetComponent<Transform>().rotation = new Quaternion(instancedFrame.GetComponent<Transform>().rotation.x,instancedFrame.GetComponent<Transform>().rotation.y+(.01f),instancedFrame.GetComponent<Transform>().rotation.z,instancedFrame.GetComponent<Transform>().rotation.w);
 			
 		}
