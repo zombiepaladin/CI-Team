@@ -61,7 +61,7 @@ public class Crop{
 		switch(ct){
 		case CropType.corn:
 			positions.Add(pos);
-			pantedCrops.Add((GameObject)GameObject.Instantiate(GameObject.Find ("hay bale"),pos,Quaternion.identity));
+			pantedCrops.Add((GameObject)GameObject.Instantiate(GameObject.Find ("1Corn"),new Vector3(pos.x,pos.y-.25f,pos.z),Quaternion.identity));
 			break;
 			
 		case CropType.wheat:
