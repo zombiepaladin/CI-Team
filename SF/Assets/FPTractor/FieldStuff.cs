@@ -4,6 +4,9 @@ using System.Collections;
 using System.IO;
 using Serialization;
 
+/// <summary>
+/// FPtractor almost the same as AI tractor but without the AI part.
+/// </summary>
 public class FieldStuff : MonoBehaviour {
 	
 	public GameObject tractor;

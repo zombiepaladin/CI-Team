@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
+
 public class FieldGUI : MonoBehaviour {
 	
 	Dictionary<string,int> fnD = new Dictionary<string, int>();
