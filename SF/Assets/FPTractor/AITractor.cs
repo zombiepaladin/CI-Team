@@ -32,11 +32,12 @@ public class AITractor : MonoBehaviour {
 	float[,,] alphatext;
 	SFField sf = new SFField();
 	string FieldName = "";
-	float cropSpace = 10.0f;
+	float cropSpace = 2.0f;
 	float moved = 0.0f;
 	float startingPoint = 50.0f;
 	Crop crop;
 	bool loaded = false;
+	Vector3 PlantV = new Vector3(50.0f,0f,50.0f);
 	
 	/*
 	 * This is ran during the start up of the scene. 
@@ -113,6 +114,7 @@ public class AITractor : MonoBehaviour {
 					waypoints.genPointsStr(tractorAI.GetComponent<Transform>().position,isPos);
 					TotalTime = 0;
 					startingPoint = tractorAI.transform.position.z;
+					//PlantV = new Vector3(
 				}
 				else if(!isPos){;
 					isline = true;
@@ -128,11 +130,10 @@ public class AITractor : MonoBehaviour {
 		if(isline){
 			moved = Mathf.Abs(tractorAI.transform.position.z - startingPoint);
 		}
-		if(moved >= cropSpace && isline && !loaded){
-			
-			crop.PlantCrop(new Vector3(tractorAI.transform.position.x,tractorAI.transform.position.y,tractorAI.transform.position.z-3.0f));
+		if(moved >= 2 && isline && !loaded){
+			crop.PlantCrop(new Vector3(PlantV.x,PlantV.y,PlantV.z));
 			moved = 0.0f;
-			startingPoint = tractorAI.transform.position.z;
+			PlantV += new Vector3(0,0,2);
 		}
 		if(loaded){
 			if(crop.lastPlant(tractorAI.transform.position)){

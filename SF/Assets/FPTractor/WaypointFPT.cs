@@ -78,36 +78,36 @@ public class WaypointFPT{
 		int i = 1;
 		int z = 1;
 		if(isPos){
-		while(k <= 45){
-			if(2*i < 10){
-				points.Add(new Vector3(cp.x+(5*i),0,cp.z+(2*i)));
+		while(k <= 20){
+			if(i < 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z+i));
 			}
-			else if(2*i == 10){
-				points.Add(new Vector3(cp.x+(5*i),0,cp.z+10));
+			else if(i == 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z+5));
 			}
-			else if(2*i > 10){
-				points.Add(new Vector3(cp.x+(5*i),0,cp.z+(10-(z*2))));
+			else if(i > 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z+(5-(z))));
 				z++;
 			}
 			
-			k += 5;
+			k += 2;
 			i++;
 			}
 		}
 		else{
-		while(k <= 45){
-			if(2*i < 10){
-				points.Add(new Vector3(cp.x+(5*i),0,cp.z-(2*i)));
+		while(k <= 20){
+			if(i < 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z-i));
 			}
-			else if(2*i == 10){
-				points.Add(new Vector3(cp.x+(5*i),0,cp.z-10));
+			else if(i == 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z-5));
 			}
-			else if(2*i > 10){
-				points.Add(new Vector3(cp.x+(5*i),0,cp.z-(10-(z*2))));
+			else if(i > 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z-(5-(z))));
 				z++;
 			}
 			
-			k += 5;
+			k += 2;
 			i++;
 			}
 		}

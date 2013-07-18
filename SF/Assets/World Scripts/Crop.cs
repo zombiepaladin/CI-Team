@@ -60,8 +60,17 @@ public class Crop{
 	public void PlantCrop(Vector3 pos){
 		switch(ct){
 		case CropType.corn:
-			positions.Add(pos);
-			pantedCrops.Add((GameObject)GameObject.Instantiate(GameObject.Find ("1Corn"),new Vector3(pos.x,pos.y-.25f,pos.z),Quaternion.identity));
+			for(int i = 0; i < 17;i++){
+				if(i <= 8){
+					positions.Add(new Vector3(pos.x+(1.25f*i),pos.y,pos.z));
+					pantedCrops.Add((GameObject)GameObject.Instantiate(GameObject.Find ("1Corn"),new Vector3(pos.x+(1.25f*i),pos.y-.25f,pos.z),Quaternion.identity));
+				}
+				if(i > 8){
+					positions.Add(new Vector3(pos.x-(1.25f*(i-8)),pos.y,pos.z));
+					pantedCrops.Add((GameObject)GameObject.Instantiate(GameObject.Find ("1Corn"),new Vector3(pos.x-(1.25f*(i-8)),pos.y-.25f,pos.z),Quaternion.identity));
+				}
+			}
+			
 			break;
 			
 		case CropType.wheat:
