@@ -168,6 +168,7 @@ public class Patches : MonoBehaviour
     //}
 
     public int addCornInstance(){
+		Debug.Log ("H1");
         int x, y, z;
         x = 0; y = 0; z = 0;
 
@@ -178,6 +179,7 @@ public class Patches : MonoBehaviour
     }
 
     public int addCornInstance(int x, int y, int z){
+		Debug.Log ("H2");
         GameObject newCorn = (GameObject)Instantiate(cornMods[age], new Vector3(x, y, z), Quaternion.identity);
         instances.Add(instances.Keys.Count, newCorn);
 
@@ -185,6 +187,7 @@ public class Patches : MonoBehaviour
     }
 
     public int addCornInstance(int x, int y, int z, int ag){
+		Debug.Log ("H3");
         GameObject newCorn = (GameObject)Instantiate(cornMods[ag], new Vector3(x, y, z), Quaternion.identity);
         instances.Add(instances.Keys.Count, newCorn);
 
