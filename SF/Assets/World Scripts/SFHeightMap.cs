@@ -1,18 +1,34 @@
 using UnityEngine;
-using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-
-public class SFHeightMap{
+/// <summary>
+/// Smart Farm Height Map.
+/// </summary>
+public class SFFieldData{
+	
 	float[,] hm;
+	float[,,] am;
+	int[,] dm;
 	int hmHeight;
 	int hmWidth;
 	
-	public SFHeightMap(int width, int height, bool gen){
-		hmHeight = height;
-		hmWidth = width;
+	/// <summary>
+	/// Initializes a new instance of the <see cref="SFHeightMap"/> class.
+	/// </summary>
+	/// <param name='width'>
+	/// Width of height map.
+	/// </param>
+	/// <param name='height'>
+	/// Height of height map.
+	/// </param>
+	/// <param name='gen'>
+	/// A bool to see if you want flat or modeled terrain.
+	/// </param>
+	public SFFieldData(int HMwidth, int HMheight, bool gen){
+		hmHeight = HMheight;
+		hmWidth = HMwidth;
 		hm = new float[hmWidth,hmHeight];
 		if(gen){
 			genHM ();
@@ -22,12 +38,10 @@ public class SFHeightMap{
 		}
 	}
 	
-	public void SaveTerrain() {
-		string filename = EditorUtility.SaveFilePanel("Save a Hight Map","","CurrentHM.sfhm","sfhm");
-		if(filename == null){
-			EditorUtility.DisplayDialog("Invalid Name!","You must name the file","Ok");
-			return;
-		}
+	/// <summary>
+	/// Saves the terrain in a SFHM file (A fancy text file).
+	/// </summary>
+	public void SaveTerrain(string filename) {
         FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.ReadWrite);
         StreamWriter sw = new StreamWriter(fs);
 		for(int i = 0; i < hmWidth; i++) {
@@ -45,13 +59,15 @@ public class SFHeightMap{
         sw.Close();
 		fs.Close();
     }
+	
+	/// <summary>
+	/// Loads the terrain from a SFHM file.
+	/// </summary>
+	/// <returns>
+	/// The terrain.
+	/// </returns>
   	public float[,] LoadTerrain() {
-		string filename = EditorUtility.OpenFilePanel("Open a Hight Map","",".sfhm");
-		if(filename == null){
-			EditorUtility.DisplayDialog("Invalid Name!","You must select a sfhm file","Ok");
-			return null;
-		}
-        FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.ReadWrite);
+        FileStream fs = new FileStream("", FileMode.Open, FileAccess.ReadWrite);
         StreamReader sr = new StreamReader(fs);
         sr.BaseStream.Seek(0, SeekOrigin.Begin);
 		string rin = " ";
@@ -70,10 +86,19 @@ public class SFHeightMap{
         return hm;
     }
 	
+	/// <summary>
+	/// Gets the Height map.
+	/// </summary>
+	/// <returns>
+	/// The Height map.
+	/// </returns>
 	public float[,] getHM(){
 		return hm;
 	}
 	
+	/// <summary>
+	/// Generates a flat height map.
+	/// </summary>
    	void genStdHM(){
 		for(int i = 0; i < hmWidth; i++){
 			for(int j = 0; j < hmHeight; j++){
@@ -81,6 +106,10 @@ public class SFHeightMap{
 			}
 		}
 	}
+	
+	/// <summary>
+	/// Generates a random height map.
+	/// </summary>
 	void genHM(){
 		for(int i = 0; i < hmWidth; i++){
 			for(int j = 0; j < hmHeight; j++){

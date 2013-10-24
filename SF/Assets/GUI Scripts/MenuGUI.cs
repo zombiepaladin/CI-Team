@@ -5,7 +5,7 @@ public class MenuGUI : MonoBehaviour {
 	
 	void OnGUI(){
 		if(GUI.Button(new Rect(0,0,150,100),"Load Tractor AI test")){
-			Application.LoadLevel("AI Tractor");
+			Application.LoadLevel("Load_Terrain");
 		}
 		if(GUI.Button(new Rect(0,100,150,100),"Load FPT Test")){
 			Application.LoadLevel("FPTractorEnvierment");
@@ -14,13 +14,13 @@ public class MenuGUI : MonoBehaviour {
 			Application.LoadLevel("TractorController");
 		}
 		if(GUI.Button (new Rect(0,300,150,100),"Load Terrain Test")){
-			Application.LoadLevel ("Terrain_Tests");
+			Application.LoadLevel("Terrain_Tests");
 		}
 		if(GUI.Button(new Rect(0,400,150,100),"Load Farmer stuff")){
 			Application.LoadLevel ("Test_Farm");
 		}
-		if(GUI.Button(new Rect(0,500,150,100),"Exit")){
-			Application.Quit();
+		if(GUI.Button(new Rect(0,500,150,100),"Info")){
+			Application.OpenURL("https://github.com/zombiepaladin/CI-Team/wiki");
 		}
 	}
 }

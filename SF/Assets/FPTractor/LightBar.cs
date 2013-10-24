@@ -19,17 +19,17 @@ public class LightBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(waypoints.checkPath(tractor.GetComponent<Transform>().position) != "Streight"){
-			float hfo;
-			if(isLine){
-				hfo = waypoints.checkHowFarOff(tractor.GetComponent<Transform>().position,isPos);
-			}
-			else{
-				hfo = waypoints.checkHowFarOff(tractor.GetComponent<Transform>().position,true);
-			}
+//		if(waypoints.checkPath(tractor.GetComponent<Transform>().position) != "Streight"){
+//			float hfo;
+//			if(isLine){
+//				hfo = waypoints.checkHowFarOff(tractor.GetComponent<Transform>().position,isPos);
+//			}
+//			else{
+//				hfo = waypoints.checkHowFarOff(tractor.GetComponent<Transform>().position,true);
+//			}
 			
 			// code to turn on lights		
-		}
+//		}
 		//waypoints.removePastPoint(tractor.GetComponent<Transform>().position);
 		//waypoints.endOfPath(tractor.GetComponent<Transform>().position);
 	}

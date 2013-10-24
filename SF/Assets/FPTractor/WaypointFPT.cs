@@ -45,7 +45,7 @@ public class WaypointFPT{
 		float k = cp.z;
 		float i = 1.0f;
 		if(isPos){
-			while(k <= terrain.GetComponent<Terrain>().terrainData.size.z-50.0f){
+			while(k <= 1000-50.0f){
 				points.Add(new Vector3(cp.x,0,50.0f*i));
 				i++;
 				k += 50;
@@ -61,12 +61,15 @@ public class WaypointFPT{
 	}
 	
 	/// <summary>
-	/// Generates the points turn.
+	/// Generates the points for a turn.
 	/// </summary>
 	/// <param name='cp'>
-	/// Current point of vehicle.
+	/// Current point.
 	/// </param>
-	public void genPointsTurn(Vector3 cp){
+	/// <param name='isPos'>
+	/// Is positive.
+	/// </param>
+	public void genPointsTurn(Vector3 cp, bool isPos){
 		if(points.Count > 0){
 			points.Clear ();
 		}
@@ -74,21 +77,40 @@ public class WaypointFPT{
 		int k = 0;
 		int i = 1;
 		int z = 1;
-		while(k <= 45){
-			if(2*i < 10){
-				points.Add(new Vector3(cp.x+(5*i),0,cp.z+(2*i)));
+		if(isPos){
+		while(k <= 20){
+			if(i < 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z+i));
 			}
-			else if(2*i == 10){
-				points.Add(new Vector3(cp.x+(5*i),0,cp.z+10));
+			else if(i == 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z+5));
 			}
-			else if(2*i > 10){
-				points.Add(new Vector3(cp.x+(5*i),0,cp.z+(10-(z*2))));
+			else if(i > 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z+(5-(z))));
 				z++;
 			}
 			
-			k += 5;
+			k += 2;
 			i++;
-		}	
+			}
+		}
+		else{
+		while(k <= 20){
+			if(i < 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z-i));
+			}
+			else if(i == 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z-5));
+			}
+			else if(i > 5){
+				points.Add(new Vector3(cp.x+(2*i),0,cp.z-(5-(z))));
+				z++;
+			}
+			
+			k += 2;
+			i++;
+			}
+		}
 	}
 	
 	/// <summary>
