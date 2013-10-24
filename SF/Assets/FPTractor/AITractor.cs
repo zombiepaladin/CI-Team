@@ -68,13 +68,13 @@ public class AITractor : MonoBehaviour {
 			alphatext[(int)normalPos.z,(int)normalPos.x,0] = 0;
 			alphatext[(int)normalPos.z,(int)normalPos.x,1] = 1;
 			terrain.GetComponent<Terrain>().terrainData.SetAlphamaps(0,0,alphatext);
-		fieldData = new SFFD(terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,2,
-			terrain.GetComponent<Terrain>().terrainData.detailWidth,terrain.GetComponent<Terrain>().terrainData.detailHeight,terrain.GetComponent<Terrain>().terrainData.detailPrototypes.Length,
-			terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight);
-		fieldData.setHM (terrain.GetComponent<Terrain>().terrainData.GetHeights(0,0,terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight));
-		fieldData.setAM (terrain.GetComponent<Terrain>().terrainData.GetAlphamaps(0,0,terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight));
-		fieldData.setDM (terrain.GetComponent<Terrain>().terrainData.GetDetailLayer(0,0,terrain.GetComponent<Terrain>().terrainData.detailWidth,terrain.GetComponent<Terrain>().terrainData.detailHeight,1));
-		fieldData.save();
+//		fieldData = new SFFD(terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight,2,
+//			terrain.GetComponent<Terrain>().terrainData.detailWidth,terrain.GetComponent<Terrain>().terrainData.detailHeight,terrain.GetComponent<Terrain>().terrainData.detailPrototypes.Length,
+//			terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight);
+//		fieldData.setHM (terrain.GetComponent<Terrain>().terrainData.GetHeights(0,0,terrain.GetComponent<Terrain>().terrainData.heightmapWidth,terrain.GetComponent<Terrain>().terrainData.heightmapHeight));
+//		fieldData.setAM (terrain.GetComponent<Terrain>().terrainData.GetAlphamaps(0,0,terrain.GetComponent<Terrain>().terrainData.alphamapWidth,terrain.GetComponent<Terrain>().terrainData.alphamapHeight));
+//		fieldData.setDM (terrain.GetComponent<Terrain>().terrainData.GetDetailLayer(0,0,terrain.GetComponent<Terrain>().terrainData.detailWidth,terrain.GetComponent<Terrain>().terrainData.detailHeight,1));
+//		fieldData.save();
 		}
 		else{
 			FieldName = PlayerPrefs.GetString("FieldName");
